@@ -3,6 +3,8 @@ call pathogen#helptags()
 set nocompatible               " be iMproved
 filetype off                   " required!
 
+nnoremap <F5> :GundoToggle<CR>
+
 syntax on
 "filetype plugin indent on
 
