@@ -1,5 +1,13 @@
+"disable before infect
+let g:pathogen_disabled = []
+"YouCompleteMe unavailable: requires Vim 7.3.584+
+if v:version < '704' || !has('python')
+        call add(g:pathogen_disabled, 'YouCompleteMe')
+    endif
+
 call pathogen#infect()
 call pathogen#helptags()
+
 set nocompatible               " be iMproved
 filetype off                   " required!
 
@@ -8,6 +16,14 @@ if has("autocmd")
 endif
 
 nnoremap <F5> :GundoToggle<CR>
+
+nnoremap <space> za
+vnoremap <space> zf
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 syntax on
 "filetype plugin indent on
