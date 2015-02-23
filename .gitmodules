@@ -1,3 +1,20 @@
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
-	url = https://github.com/tpope/vim-fugitive.git
+    url = https://github.com/tpope/vim-fugitive.git
+
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+
+[submodule "bundle/taskwarrior"]
+	path = bundle/taskwarrior
+	url = https://github.com/farseer90718/vim-taskwarrior.git
+
+[submodule "bundle/pylint"]
+	path = bundle/pylint
+	url = https://github.com/orenhe/pylint.vim.git
+
+[submodule "bundle/pyflakes"]
+	path = bundle/pyflakes
+	url = https://github.com/kevinw/pyflakes-vim.git
+
