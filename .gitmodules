@@ -12,21 +12,15 @@
 
 [submodule "bundle/pylint"]
 	path = bundle/pylint
-	url = https://github.com/orenhe/pylint.vim.git
-
-[submodule "bundle/pyflakes"]
-	path = bundle/pyflakes
-	url = https://github.com/kevinw/pyflakes-vim.git
+    url = https://github.com/orenhe/pylint.vim.git
 
 [submodule "bundle/gundo"]
 	path = bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
-	url = http://github.com/tpope/vim-unimpaired
-[submodule "markdown-folding"]
-	path = markdown-folding
-	url = https://github.com/nelstrom/vim-markdown-folding.git
+    url = http://github.com/tpope/vim-unimpaired
+
 [submodule "bundle/markdown-folding"]
 	path = bundle/markdown-folding
 	url = https://github.com/nelstrom/vim-markdown-folding.git
