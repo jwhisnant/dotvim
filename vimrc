@@ -1,11 +1,10 @@
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 call pathogen#helptags()
-
 set nocompatible               " be iMproved
 filetype off                   " required!
 
 syntax on
-filetype plugin indent on
+"filetype plugin indent on
 
 "Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
 "let g:jedi#popup_on_dot = 0
