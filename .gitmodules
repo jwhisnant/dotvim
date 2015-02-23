@@ -27,3 +27,9 @@
 [submodule "vim-markdown-folding"]
 	path = vim-markdown-folding
 	url = https://github.com/nelstrom/vim-markdown-folding.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = git://github.com/SirVer/ultisnips.git
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
