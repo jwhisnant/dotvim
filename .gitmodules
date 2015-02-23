@@ -24,3 +24,9 @@
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
 	url = http://github.com/tpope/vim-unimpaired
+[submodule "markdown-folding"]
+	path = markdown-folding
+	url = https://github.com/nelstrom/vim-markdown-folding.git
+[submodule "bundle/markdown-folding"]
+	path = bundle/markdown-folding
+	url = https://github.com/nelstrom/vim-markdown-folding.git

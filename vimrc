@@ -3,6 +3,10 @@ call pathogen#helptags()
 set nocompatible               " be iMproved
 filetype off                   " required!
 
+if has("autocmd")
+  filetype plugin indent on
+endif
+
 nnoremap <F5> :GundoToggle<CR>
 
 syntax on
