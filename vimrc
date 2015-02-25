@@ -1,4 +1,4 @@
-"disable before infect
+disable before infect
 let g:pathogen_disabled = []
 "YouCompleteMe unavailable: requires Vim 7.3.584+
 if v:version < '704' || !has('python')
@@ -9,6 +9,7 @@ call pathogen#infect()
 call pathogen#helptags()
 
 "256 colors http://robotsrule.us/vim/
+"set t_Co=8
 set t_Co=8
 
 set nocompatible               " be iMproved
@@ -35,10 +36,13 @@ call pymode#default('g:pymode_rope_project_root', '/dev/null/')
 autocmd FileType python set colorcolumn=100
 
 "setup vimdiff
-highlight DiffAdd cterm=none ctermfg=black ctermbg=Green gui=none guifg=bg guibg=Green
-highlight DiffDelete cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=none ctermfg=black ctermbg=Yellow gui=none guifg=bg guibg=Yellow
-highlight DiffText cterm=none ctermfg=black ctermbg=Magenta gui=none guifg=bg guibg=Magenta
+"au FilterWritePre * if &diff | set t_Co=256 | colorscheme jellybeans | endif
+au BufEnter,WinEnter * if &diff | set t_Co=256 | colorscheme jellybeans
+"conditionals dont seem to work here ...
+au BufWinLeave * set t_Co=8|colorscheme evening
+
+"return from vimdiff
+"au BufWinLeave * set t_Co=8 | colorscheme evening
 
 " more characters
 set textwidth=100
