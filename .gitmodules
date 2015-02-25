@@ -16,20 +16,44 @@
 
 [submodule "bundle/gundo"]
 	path = bundle/gundo
-	url = http://github.com/sjl/gundo.vim.git
+    url = http://github.com/sjl/gundo.vim.git
+
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
     url = http://github.com/tpope/vim-unimpaired
 
 [submodule "bundle/markdown-folding"]
 	path = bundle/markdown-folding
-	url = https://github.com/nelstrom/vim-markdown-folding.git
+    url = https://github.com/nelstrom/vim-markdown-folding.git
+
 [submodule "vim-markdown-folding"]
 	path = vim-markdown-folding
-	url = https://github.com/nelstrom/vim-markdown-folding.git
+    url = https://github.com/nelstrom/vim-markdown-folding.git
+
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
-	url = git://github.com/SirVer/ultisnips.git
+    url = git://github.com/SirVer/ultisnips.git
+
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
+    url = https://github.com/Valloric/YouCompleteMe.git
+
+[submodule "bundle/honza-snippets"]
+	path = bundle/honza-snippets
+    url = https://github.com/honza/vim-snippets.git
+
+[submodule "bundle/bootstrap3-snippets"]
+	path = bundle/bootstrap3-snippets
+    url = https://github.com/chrisgillis/vim-bootstrap3-snippets.git
+
+[submodule "bundle/pyflakes-vim"]
+	path = bundle/pyflakes-vim
+    url = https://github.com/kevinw/pyflakes-vim
+
+[submodule "bundle/python-mode"]
+	path = bundle/python-mode
+    url = https://github.com/klen/python-mode.git
+
+[submodule "colors/github-colorscheme"]
+	path = colors/github-colorscheme
+	url = https://github.com/endel/vim-github-colorscheme.git
