@@ -8,6 +8,9 @@ if v:version < '704' || !has('python')
 call pathogen#infect()
 call pathogen#helptags()
 
+"256 colors http://robotsrule.us/vim/
+set t_Co=8
+
 set nocompatible               " be iMproved
 filetype off                   " required!
 
@@ -16,42 +19,61 @@ if has("autocmd")
 endif
 
 nnoremap <F5> :GundoToggle<CR>
+noremap <F8> :PymodeLintAuto<CR>
 
 nnoremap <space> za
 vnoremap <space> zf
+
+" Complete keywords from not imported modules (could make completion slower)
+" could take, like forever
+call pymode#default('g:pymode_rope_autoimport',0)
+call pymode#default('g:pymode_rope_lookup_project',0)
+call pymode#default('g:pymode_rope_project_root', '/dev/null/')
+"call pymode#default('g:pymode_options_max_line_length', 100)
+"let g:pymode_options_max_line_length="100" no worky
+
+autocmd FileType python set colorcolumn=100
+
+"setup vimdiff
+highlight DiffAdd cterm=none ctermfg=black ctermbg=Green gui=none guifg=bg guibg=Green
+highlight DiffDelete cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=none ctermfg=black ctermbg=Yellow gui=none guifg=bg guibg=Yellow
+highlight DiffText cterm=none ctermfg=black ctermbg=Magenta gui=none guifg=bg guibg=Magenta
+
+" more characters
+set textwidth=100
+
+" for set trace onliner
+let g:pep8_ignore="E231"
+
+"Do not fix these errors/warnings (default: E226,E24,W6)
+let g:autopep8_ignore="E226,E24,W6,E231"
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" Snippets variables
+let g:snips_author='James Whisnant'
+let g:author='James Whisnant'
+let g:snips_email='jwhisnant@gmail.com'
+let g:email='jwhisnant@gmail.com'
+let g:snips_github='https://github.com/jwhisnant'
+let g:github='https://github.com/jwhisnant'
+
+" Pylint configuration file
+"does not work
+"let g:pymode_lint_config = '$HOME/pylint.rc'
+
+" For full syntax highlighting:
+let python_highlight_all=1
 syntax on
-"filetype plugin indent on
 
-"Jedi automatically starts the completion, if you type a dot, e.g. str., if you don't want this:
-"let g:jedi#popup_on_dot = 0
-
-"Use this option to tell syntastic whether to use syntax highlighting to mark              
-"errors (where possible). Highlighting can be turned off with the following >              
-let g:syntastic_enable_highlighting = 1
-
-"Python has the following checkers: flake8, pyflakes, pylint and a native python checker.
-"let g:syntastic_<filetype>_checkers=['<checker-name>']
-"let g:syntastic_python_checkers=['flake8', 'pyflakes', 'pylint', 'python']
-
-let g:syntastic_python_checkers=['python']
-"let g:syntastic_python_checkers=['flake8', 'python']
-"let g:syntastic_python_checkers=['python']
-
-" Enable pylint checking every save
-"let g:pymode_lint_checker = "pyflakes"
-
-" Auto open cwindow if errors be finded
-"let g:pymode_lint_cwindow = 1
-
-" Skip errors and warnings
-"http://pylint-messages.wikidot.com/all-codes
-let g:pymode_lint_ignore = "W"
+let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
 
 " vimrc file for following the coding standards specified in PEP 7 & 8.
 "
@@ -82,15 +104,16 @@ set number
 
 set shiftwidth=4
 
+" a python file is a python file ....
+" I know this is silly but something with # as first char in a script things break
+au BufRead,BufNewFile *.py set filetype=python
+
 "james python settings
 au BufRead,BufNewFile *.py,*pyw set tabstop=4
 "what does this do ??? - bad plan with our messed up tabs, etc
 "au BufRead,BufNewFile *.py,*pyw set smarttab 
 au BufRead,BufNewFile *.py,*pyw set expandtab
 au BufRead,BufNewFile *.py,*pyw set softtabstop=4
-
-"this loads pyflakes.vim
-"filetype plugin indent on
 
 "If you prefer backspace and delete in Insert mode to have the old behavior,
 "put this line in your vimrc:
@@ -165,10 +188,6 @@ set encoding=utf-8
 " UCS encoding (WARNING: can trick shells into thinking a text file is actually
 " a binary file when executing the text file): ``set bomb``
 
-" For full syntax highlighting:
-let python_highlight_all=1
-syntax on
-
 " Automatically indent based on file type: 
 "filetype indent on
 " Keep indentation level from previous line: ``set autoindent``
@@ -204,7 +223,7 @@ au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set expandtab
 filetype plugin on
 
 "If wanted, auto commenting can be disabled for all files with:
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 
 " some javascript stuff
