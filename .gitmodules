@@ -57,3 +57,9 @@
 [submodule "colors/github-colorscheme"]
 	path = colors/github-colorscheme
 	url = https://github.com/endel/vim-github-colorscheme.git
+[submodule "bundle/colorschemes"]
+	path = bundle/colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
+[submodule "bundle/vcscommand"]
+	path = bundle/vcscommand
+	url = http://repo.or.cz/vcscommand.git
