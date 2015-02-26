@@ -32,6 +32,9 @@ endif
 
 "hotkeys and rebindings
 noremap <F5> :GundoToggle<CR>
+"check
+noremap <F7> :PymodeLint<CR>
+"fix
 noremap <F8> :PymodeLintAuto<CR>
 
 nnoremap <space> za
@@ -250,14 +253,20 @@ let g:pymode_syntax_slow_sync = 1
 let g:pymode_syntax_all = 1
 let g:pymode_motion = 1
 let g:pymode_trim_whitespaces = 0
-"let g:pymode_lint_on_write = 0
-let g:pymode_lint_unmodified = 1 " check on save (every)
+let g:pymode_lint_on_write = 0
+"let g:pymode_lint_unmodified = 1 " check on save (every)
 let g:pymode_syntax_string_formatting = 1
 let g:pymode_syntax_string_format = 1
 let g:pymode_syntax_string_templates = 1
 let g:pymode_syntax_doctests = 1
 let g:pymode_rope = 0
 let g:pymode_rope_complete_on_dot = 0
+
+"E256 comma space
+"E702 oneliner
+let g:pymode_lint_ignore = "E702,E265"
+
+
 "let g:pymode_breakpoint = 0 "\b is ok
 
 "Tagbar
@@ -270,6 +279,19 @@ let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_iconchars = ['+', '-']
 nnoremap <silent> <Leader>t :TagbarToggle<CR>
+
+" Minibufexplorer
+noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
+noremap <silent> <Leader><tab> :MBEbb<CR>
+
+"let g:miniBufExplorerAutoStart = 0          " Open MBE manually when needed.
+let g:miniBufExplTabWrap = 1                " Don't break a minibuf tab across lines
+let g:miniBufExplBuffersNeeded = 4          " start ASAP
+let g:miniBufExplVSplit = 20                " Make minibuf explorer vertical
+let g:did_minibufexplorer_syntax_inits = 1  " Use my colors.
+let g:miniBufExplCycleArround = 1           " Cycle when doing buffer movement.
+"let g:miniBufExplShowBufNumbers = 0         " Don't show buffer numbers.
+
 
 " Custom formatters
 if has("python")
