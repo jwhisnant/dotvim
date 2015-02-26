@@ -1,77 +1,83 @@
+"things to do first
+set nocompatible               " be iMproved
+filetype off                   " required!
+
 "disable before infect
 let g:pathogen_disabled = []
+
 "YouCompleteMe unavailable: requires Vim 7.3.584+
 if v:version < '704' || !has('python')
         call add(g:pathogen_disabled, 'YouCompleteMe')
     endif
 
+"deprecated or uninteresting
+call add(g:pathogen_disabled, 'pyflakes-vim') "use pythonmode
+call add(g:pathogen_disabled, 'unimpaired') "we dont need no stinkin brackets
+call add(g:pathogen_disabled, 'syntastic') "pymode
+
+"infect
 call pathogen#infect()
 call pathogen#helptags()
-" macros and setup
 
-" Complete keywords from not imported modules (could make completion slower)
-" could take, like forever
-call pymode#default('g:pymode_rope_autoimport',0)
-call pymode#default('g:pymode_rope_lookup_project',0)
-call pymode#default('g:pymode_rope_project_root', '/dev/null/')
-"call pymode#default('g:pymode_options_max_line_length', 100)
-"let g:pymode_options_max_line_length="100" no worky
-
+"python-mode wants
+filetype plugin indent on
+syntax on
 
 "256 colors http://robotsrule.us/vim/
 set t_Co=256
-
-set nocompatible               " be iMproved
-filetype off                   " required!
 
 if has("autocmd")
   filetype plugin indent on
 endif
 
-"hotkeys
+"hotkeys and rebindings
 noremap <F5> :GundoToggle<CR>
 noremap <F8> :PymodeLintAuto<CR>
 
 nnoremap <space> za
 vnoremap <space> zf
 
+"colors ka ka ka kolors
+set background=dark
+color sorcerer
+"color jellybeans
+"color mango
+"color ingretu
+"color colorful256
 
-"setup vimdiff
-"color on entry
-"au FilterWritePre * if &diff | set t_Co=256 | colorscheme jellybeans | endif
-"au BufEnter,WinEnter * if &diff | set t_Co=256 | colorscheme jellybeans|endif
-"
-"conditionals dont seem to work here ...
-"au BufWinLeave * if &diff !=1 |set t_Co=8|colorscheme evening |endif
+" does not work, hacked the original
+"let g:VCSCommandSplit='vertical'
+"augroup VCSCommand
+"    if &diff
+"        au VCSCommand User VCSBufferCreated :wincmd L<cr>
+"    endif
+"augroup END
 
-"return from vimdiff
-"au BufWinLeave * set t_Co=8 | colorscheme evening
-"au BufWinLeave * colorscheme colorful256 
+set listchars=tab:>-,eol:$,trail:-      " When in show-all-chars mode (set list), use >-- for tabs.
+set tabstop=8                           " Real tab characters take up 8 spaces
+set softtabstop=4                       "   but indent by 4 when typing tab while editing.
+set expandtab                           " Use spaces when hitting the tab key
+set shiftwidth=4                        "   and shift by 4 spaces when indenting.
+set shiftround                          " When indenting, round to a multiple of shiftwidth.
+set autoindent                          " Pick the indent for a line from the previous line.
+set nosmarttab                          " Tabs always means the same thing, don't be too smart.
+set indentkeys=o,O                      " Only new lines should get auto-indented.
 
-" more characters
-set textwidth=120
-autocmd FileType python set colorcolumn=
+filetype plugin indent on               " Use the filetype to load syntax, plugins and indent files.
+set hlsearch                            " Highlight search results in the file.
+set autoread                            " Re-read a file if it changed behind vim's back.
+set hidden                              " Allow a modified buffer to become hidden.
+set nowrap                              " When I want to be confused by wrapped lines, I'll do it manually.
+set linebreak                           "   but when I do wrap, I want word wrap, not character.
+set display=lastline,uhex               " Display as much as possible of a last line, and ctrl chars in hex.
+set ignorecase smartcase                " If all lower-case, match any case, else be case-sensitive
+set virtualedit=onemore                 " One virtual character at the ends of lines, makes ^V work properly.
+set noerrorbells                        " Don't ring the bell on errors
+set visualbell t_vb=                    "   and don't flash either.
+set mouse=a                             " Mice are wonderful.
+set fillchars=vert:\ ,fold:-            " Spaces are enough for vertical split separators.
 
-" for set trace onliner
-let g:pep8_ignore="E231,E501"
 
-"Do not fix these errors/warnings (default: E226,E24,W6)
-let g:autopep8_ignore="E226,E24,W6,E231"
-"
-" VCSCommand
-" put window on correct side on diff
-let g:VCSCommandSplit='vertical'
-"let Sdiff = VCSVimDiff | :wincmd L<cr>
-"let Sblame = VCSBlame! | scrollbind
-"
-augroup VCSCommand
-    if &diff
-        au VCSCommand User VCSBufferCreated :wincmd L<cr>
-"au VCSCommand User VCSBufferCreated silent! nmap <unique> <buffer> q :bwipeout<cr> 
-    endif
-augroup END
-
-"
 " ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -88,28 +94,14 @@ let g:email='jwhisnant@gmail.com'
 let g:snips_github='https://github.com/jwhisnant'
 let g:github='https://github.com/jwhisnant'
 
-" Pylint configuration file
-"does not work
-"let g:pymode_lint_config = '$HOME/pylint.rc'
-
 " For full syntax highlighting:
-let python_highlight_all=1
-syntax on
+"let python_highlight_all=1
+"syntax on
 
 "let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
 " pylint unable to import  -yes so kick to kurb
-let g:syntastic_python_checkers=['python', 'pep8', 'flake8', 'pylint'] 
+"let g:syntastic_python_checkers=['python', 'pep8', 'flake8', 'pylint', 'pyflakes'] 
 "'pyflakes' "'pylint'
-
-
-" user settings
-"james default settings
-set background=dark
-"color jellybeans
-color sorcerer
-"color mango
-"color ingretu
-"color colorful256
 
 set visualbell t_vb=
 set backspace=2 " make backspace work like most other apps
@@ -121,7 +113,7 @@ set shiftwidth=4
 
 " a python file is a python file ....
 " I know this is silly but something with # as first char in a script things break
-au BufRead,BufNewFile *.py set filetype=python
+"au BufRead,BufNewFile *.py set filetype=python
 
 "james python settings
 au BufRead,BufNewFile *.py,*pyw set tabstop=4
@@ -197,31 +189,11 @@ set encoding=utf-8
 " Puts a marker at the beginning of the file to differentiate between UTF and
 " UCS encoding (WARNING: can trick shells into thinking a text file is actually
 " a binary file when executing the text file): ``set bomb``
-
-" Automatically indent based on file type: 
-"filetype indent on
-" Keep indentation level from previous line: ``set autoindent``
-"set autoindent
-
-"DIAF folding
-"set nofoldenable
-
-" Folding based on indentation: 
-"set foldmethod=syntax
-" open all folds please
-set foldlevelstart=99
-set foldlevel=99
-"set nocompatible
-"set tabstop=4
-"set shiftwidth=4
-"set expandtab
-"set softtabstop=4
-
+"
 "au BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class 
 "set up us the mapping of file types ..
 au BufRead,BufNewFile *.zcml :set ft=xml 
 au BufRead,BufNewFile *.kss :set ft=css
-
 
 "To highlight all search matches in a file, set the following option: 
 set hlsearch
@@ -233,4 +205,44 @@ au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set shiftwidth=2
 au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set softtabstop=2
 au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set expandtab
 
-filetype plugin on
+
+"pymode
+"let g:pymode = 0
+"let g:pymode_lint = 0
+
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe'] "default
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint', 'pep257']
+
+" options
+let g:pymode_folding = 0
+let g:pymode_options_max_line_length = 100
+
+" Complete keywords from not imported modules (could make completion slower)
+" could take, like forever
+""rope
+"let g:pymode_rope = 0
+"let g:pymode_rope_autoimport = 0
+"let g:pymode_rope_lookup_project = 0
+"let g:pymode_rope_project_root = '/dev/null/'
+
+"702 is the onliner
+"et g:pep8_ignore="E702"
+"
+"
+" Pymode
+let g:pymode_folding = 0
+let g:pymode_syntax = 1
+let g:pymode_syntax_slow_sync = 1
+let g:pymode_syntax_all = 1
+let g:pymode_motion = 1
+let g:pymode_trim_whitespaces = 0
+"let g:pymode_lint_on_write = 0
+let g:pymode_lint_unmodified = 1 " check on save (every)
+let g:pymode_syntax_string_formatting = 1
+let g:pymode_syntax_string_format = 1
+let g:pymode_syntax_string_templates = 1
+let g:pymode_syntax_doctests = 1
+let g:pymode_rope = 0
+let g:pymode_rope_complete_on_dot = 0
+"let g:pymode_breakpoint = 0 "\b is ok
+
