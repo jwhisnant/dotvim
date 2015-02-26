@@ -7,8 +7,8 @@ let g:pathogen_disabled = []
 
 "YouCompleteMe unavailable: requires Vim 7.3.584+
 if v:version < '704' || !has('python')
-        call add(g:pathogen_disabled, 'YouCompleteMe')
-    endif
+    call add(g:pathogen_disabled, 'YouCompleteMe')
+endif
 
 "deprecated or uninteresting
 call add(g:pathogen_disabled, 'pyflakes-vim') "use pythonmode
@@ -74,9 +74,23 @@ set ignorecase smartcase                " If all lower-case, match any case, els
 set virtualedit=onemore                 " One virtual character at the ends of lines, makes ^V work properly.
 set noerrorbells                        " Don't ring the bell on errors
 set visualbell t_vb=                    "   and don't flash either.
-set mouse=a                             " Mice are wonderful.
+"set mouse=a                             " Mice are wonderful.
 set fillchars=vert:\ ,fold:-            " Spaces are enough for vertical split separators.
 
+set laststatus=2                        " Always show a status line
+let filestatus = ''
+let filestatus .= ' %1*%{&readonly ? "" : &modified ? " + " : &modifiable ? "" : " - "}%*'
+let filestatus .= '%3*%{&readonly ? (&modified ? " + " : " . ") : ""}%*'
+let filestatus .= '%{&readonly? "" : &modified ? "" : &modifiable ? "   " : ""}'
+let filestatus .= ' %<%f  '
+let filestatus .= '%2*%{tagbar#currenttag(" %s ", "", "f")}%*'
+let filestatus .= ' %{fugitive#statusline()}'
+let filestatus .= '%='
+let filestatus .= '%{strlen(&filetype) ? &filetype : "none"}'
+let filestatus .= ' [%{strpart(&fileencoding,0,1)}%{strpart(&fileformat,0,1)}]'
+let filestatus .= '%6l,%2c'
+let filestatus .= '  %P '
+let &statusline = filestatus
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -245,4 +259,47 @@ let g:pymode_syntax_doctests = 1
 let g:pymode_rope = 0
 let g:pymode_rope_complete_on_dot = 0
 "let g:pymode_breakpoint = 0 "\b is ok
+
+"Tagbar
+let g:tagbar_width = 40
+let g:tagbar_zoomwidth = 30
+let g:tagbar_sort = 0                               " sort by order in file
+let g:tagbar_show_visibility = 0
+let g:tagbar_show_linenumbers = 0
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_iconchars = ['+', '-']
+nnoremap <silent> <Leader>t :TagbarToggle<CR>
+
+" Custom formatters
+if has("python")
+    python << EOF_PY
+import json, vim, sys
+
+def pretty_xml(x):
+    """Make xml string `x` nicely formatted."""
+    # Hat tip to http://code.activestate.com/recipes/576750/
+    import xml.dom.minidom as md
+    new_xml = md.parseString(x.strip()).toprettyxml(indent=' '*2)
+    return '\n'.join([line for line in new_xml.split('\n') if line.strip()])
+
+def pretty_json(j):
+    """Make json string `j` nicely formatted."""
+    return json.dumps(json.loads(j), sort_keys=True, indent=4)
+
+prettiers = {
+    'xml':  pretty_xml,
+    'json': pretty_json,
+    }
+
+def pretty_it(datatype):
+    b = vim.current.buffer
+    content = "\n".join(b)
+    content = prettiers[datatype](content)
+    b[:] = str(content).split('\n')
+EOF_PY
+
+    command! Pxml :python pretty_it('xml')
+    command! Pjson :python pretty_it('json')
+endif
 
