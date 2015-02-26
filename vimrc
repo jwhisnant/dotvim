@@ -1,4 +1,4 @@
-disable before infect
+"disable before infect
 let g:pathogen_disabled = []
 "YouCompleteMe unavailable: requires Vim 7.3.584+
 if v:version < '704' || !has('python')
@@ -7,23 +7,7 @@ if v:version < '704' || !has('python')
 
 call pathogen#infect()
 call pathogen#helptags()
-
-"256 colors http://robotsrule.us/vim/
-"set t_Co=8
-set t_Co=8
-
-set nocompatible               " be iMproved
-filetype off                   " required!
-
-if has("autocmd")
-  filetype plugin indent on
-endif
-
-nnoremap <F5> :GundoToggle<CR>
-noremap <F8> :PymodeLintAuto<CR>
-
-nnoremap <space> za
-vnoremap <space> zf
+" macros and setup
 
 " Complete keywords from not imported modules (could make completion slower)
 " could take, like forever
@@ -33,26 +17,61 @@ call pymode#default('g:pymode_rope_project_root', '/dev/null/')
 "call pymode#default('g:pymode_options_max_line_length', 100)
 "let g:pymode_options_max_line_length="100" no worky
 
-autocmd FileType python set colorcolumn=100
+
+"256 colors http://robotsrule.us/vim/
+set t_Co=256
+
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+if has("autocmd")
+  filetype plugin indent on
+endif
+
+"hotkeys
+noremap <F5> :GundoToggle<CR>
+noremap <F8> :PymodeLintAuto<CR>
+
+nnoremap <space> za
+vnoremap <space> zf
+
 
 "setup vimdiff
+"color on entry
 "au FilterWritePre * if &diff | set t_Co=256 | colorscheme jellybeans | endif
-au BufEnter,WinEnter * if &diff | set t_Co=256 | colorscheme jellybeans
+"au BufEnter,WinEnter * if &diff | set t_Co=256 | colorscheme jellybeans|endif
+"
 "conditionals dont seem to work here ...
-au BufWinLeave * set t_Co=8|colorscheme evening
+"au BufWinLeave * if &diff !=1 |set t_Co=8|colorscheme evening |endif
 
 "return from vimdiff
 "au BufWinLeave * set t_Co=8 | colorscheme evening
+"au BufWinLeave * colorscheme colorful256 
 
 " more characters
-set textwidth=100
+set textwidth=120
+autocmd FileType python set colorcolumn=
 
 " for set trace onliner
-let g:pep8_ignore="E231"
+let g:pep8_ignore="E231,E501"
 
 "Do not fix these errors/warnings (default: E226,E24,W6)
 let g:autopep8_ignore="E226,E24,W6,E231"
+"
+" VCSCommand
+" put window on correct side on diff
+let g:VCSCommandSplit='vertical'
+"let Sdiff = VCSVimDiff | :wincmd L<cr>
+"let Sblame = VCSBlame! | scrollbind
+"
+augroup VCSCommand
+    if &diff
+        au VCSCommand User VCSBufferCreated :wincmd L<cr>
+"au VCSCommand User VCSBufferCreated silent! nmap <unique> <buffer> q :bwipeout<cr> 
+    endif
+augroup END
 
+"
 " ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -61,7 +80,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" Snippets variables
+" Snippets variables some things use these ...
 let g:snips_author='James Whisnant'
 let g:author='James Whisnant'
 let g:snips_email='jwhisnant@gmail.com'
@@ -77,35 +96,27 @@ let g:github='https://github.com/jwhisnant'
 let python_highlight_all=1
 syntax on
 
-let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
+"let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
+" pylint unable to import  -yes so kick to kurb
+let g:syntastic_python_checkers=['python', 'pep8', 'flake8', 'pylint'] 
+"'pyflakes' "'pylint'
 
-" vimrc file for following the coding standards specified in PEP 7 & 8.
-"
-" To use this file, source it in your own personal .vimrc file (``source
-" <filename>``) or, if you don't have a .vimrc file, you can just symlink to it
-" (``ln -s <this file> ~/.vimrc``).  All options are protected by aus
-" (read below for an explanation of the command) so blind sourcing of this file
-" is safe and will not affect your settings for non-Python or non-C files.
-"
-"
-" All setting are protected by 'au' ('au') statements.  Only files ending
-" in .py or .pyw will trigger the Python settings while files ending in *.c or
-" *.h will trigger the C settings.  This makes the file "safe" in terms of only
-" adjusting settings for Python and C files.
-"
-" Only basic settings needed to enforce the style guidelines are set.
-" Some suggested options are listed but commented out at the end of this file.
 
+" user settings
 "james default settings
 set background=dark
-color evening
+"color jellybeans
+color sorcerer
+"color mango
+"color ingretu
+"color colorful256
+
 set visualbell t_vb=
 set backspace=2 " make backspace work like most other apps
 set tabstop=4
 set expandtab
 set softtabstop=4
 set number
-
 set shiftwidth=4
 
 " a python file is a python file ....
@@ -114,8 +125,6 @@ au BufRead,BufNewFile *.py set filetype=python
 
 "james python settings
 au BufRead,BufNewFile *.py,*pyw set tabstop=4
-"what does this do ??? - bad plan with our messed up tabs, etc
-"au BufRead,BufNewFile *.py,*pyw set smarttab 
 au BufRead,BufNewFile *.py,*pyw set expandtab
 au BufRead,BufNewFile *.py,*pyw set softtabstop=4
 
@@ -162,9 +171,6 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 " Python: 79 
 " C: 79
 
-" no, we hates it
-"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=79
-
 " Turn off settings in 'formatoptions' relating to comment formatting.
 " - c : do not automatically insert the comment leader when wrapping based on
 "    'textwidth'
@@ -197,11 +203,14 @@ set encoding=utf-8
 " Keep indentation level from previous line: ``set autoindent``
 "set autoindent
 
+"DIAF folding
+"set nofoldenable
+
 " Folding based on indentation: 
-set nofoldenable
 "set foldmethod=syntax
 " open all folds please
-"set foldlevelstart=10
+set foldlevelstart=99
+set foldlevel=99
 "set nocompatible
 "set tabstop=4
 "set shiftwidth=4
@@ -225,38 +234,3 @@ au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set softtabstop=2
 au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set expandtab
 
 filetype plugin on
-
-"If wanted, auto commenting can be disabled for all files with:
-"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-
-" some javascript stuff
-"cabbr js !js /home/cpc/bin/js/runjslint.js "`cat %`"
-"cabbr js !js /home/cpc/bin/js/runjslint.js "`cat %`" \| /home/cpc/bin/js/format_lint_output.py
-
-"set ofu=syntaxcomplete#Complete
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
-"autocmd FileType python compiler pylint
-
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1 
-"let Tlist_Ctags_Cmd='/usr/bin/ctags'
-"map T :TaskList<CR>
-"map P :TlistToggle<CR>
-"
-""page templates configuration
-"autocmd BufNewFile,BufRead *.pt,*.cpt,*.zpt setfiletype zpt
-"autocmd FileType zpt set makeprg=zptlint\ %
-"autocmd FileType zpt set errorformat=%+P***\ Error\ in:\ %f,%Z%*\\s\\,\ at\ line\ %l\\,\ column\ %c,%E%*\\s%m,%-Q
-
-"augroup filetype
-"  au BufWritePost,FileWritePost *.pt make
-"  au BufWritePost,FileWritePost *.cpt make
-"  au BufWritePost,FileWritePost *.zpt make
-"augroup END
-"
-" folding
-set foldmethod=indent
-
