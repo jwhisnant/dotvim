@@ -1,22 +1,8 @@
-snippet newkls
-"""
-Docstring here
-Author: 
-Date:
-"""
-
-class Bob:
-
-	def __init__(self):
-		"""
-		init for Bob
-		"""
-
-	def __call__(self):
-		"""
-		call for Bob
-		"""
-if __name__=='__main__':
-	bob=Bob()
-	bob()
+snippet todo
+#XXX TODO: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $USER`)}
 endsnippet
+
+snippet fixme
+#XXX FIXME: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $USER`)}
+endsnippet
+
