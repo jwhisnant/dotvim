@@ -28,6 +28,19 @@ call pathogen#helptags()
 filetype plugin indent on
 syntax on
 
+"CUSTOM USER SETTINGS
+"Snippets variables some things use these ...
+"create an autoload contact info for snips defines or customize below ...
+":call custom#contact()
+
+"let g:snips_author=''
+"let g:author=''
+"let g:snips_email=''
+"let g:email=''
+"let g:snips_github=''
+"let g:github=''
+
+
 "256 colors http://robotsrule.us/vim/
 set t_Co=256
 
@@ -101,20 +114,17 @@ let filestatus .= '  %P '
 let &statusline = filestatus
 
 " ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"let g:UltiSnipsExpandTrigger="<tab>" "YCM uses tab
+"let g:UltiSnipsJumpForwardTrigger="<tab>" "YCM uses tab
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-
-" Snippets variables some things use these ...
-let g:snips_author='James Whisnant'
-let g:author='James Whisnant'
-let g:snips_email='jwhisnant@gmail.com'
-let g:email='jwhisnant@gmail.com'
-let g:snips_github='https://github.com/jwhisnant'
-let g:github='https://github.com/jwhisnant'
 
 " For full syntax highlighting:
 "let python_highlight_all=1
@@ -337,3 +347,36 @@ endif
 "nnoremap <left>  :cprev<cr>zvzz
 "nnoremap <right> :cnext<cr>zvzz
 
+"YouCompleteMe
+let g:ycm_min_num_of_chars_for_completion = 2
+
+"YCM and Ultisnips
+"
+"https://vimeo.com/93364612
+"https://github.com/Valloric/YouCompleteMe/issues/36#issuecomment-15451411
+"UltiSnips completion function that tries to expand a snippet. If there's no
+"snippet for expanding, it checks for completion window and if it's
+"shown, selects first element. If there's no completion window it tries to
+"jump to next placeholder. If there's no placeholder it just returns TAB key 
+
+function! g:UltiSnips_Complete()
+    "call UltiSnips_ExpandSnippet() "Deprecated UltiSnips_ExpandSnippet called. Please use UltiSnips#ExpandSnippet
+    call UltiSnips#ExpandSnippet()
+
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            "Deprecated UltiSnips_JumpForwards called. Please use UltiSnips#JumpForwards.
+            "call UltiSnips_JumpForwards()
+            UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction"
+
+" we need this here because of have .vimrc is loaded to get the above to work
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
