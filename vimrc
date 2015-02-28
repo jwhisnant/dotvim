@@ -13,7 +13,12 @@ endif
 "deprecated or uninteresting
 call add(g:pathogen_disabled, 'pyflakes-vim') "use pythonmode
 call add(g:pathogen_disabled, 'unimpaired') "we dont need no stinkin brackets
-call add(g:pathogen_disabled, 'syntastic') "pymode
+call add(g:pathogen_disabled, 'airline') "use the nedbat
+call add(g:pathogen_disabled, 'powerline') "steep requirements,skip it
+call add(g:pathogen_disabled, 'gist') "use Gist instead
+
+"commented - we want to try tidy for xml with syntastic
+let g:syntastic_ignore_files = ['\.py$'] "pymode instead
 
 "infect
 call pathogen#infect()
@@ -237,14 +242,11 @@ let g:pymode_options_max_line_length = 100
 " Complete keywords from not imported modules (could make completion slower)
 " could take, like forever
 ""rope
-"let g:pymode_rope = 0
-"let g:pymode_rope_autoimport = 0
-"let g:pymode_rope_lookup_project = 0
-"let g:pymode_rope_project_root = '/dev/null/'
+let g:pymode_rope = 0
+let g:pymode_rope_autoimport = 0
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope_project_root = '/dev/null/'
 
-"702 is the onliner
-"et g:pep8_ignore="E702"
-"
 "
 " Pymode
 let g:pymode_folding = 0
@@ -262,12 +264,16 @@ let g:pymode_syntax_doctests = 1
 let g:pymode_rope = 0
 let g:pymode_rope_complete_on_dot = 0
 
-"E256 comma space
-"E702 oneliner
-let g:pymode_lint_ignore = "E702,E265"
-
-
+"E256 comma space "E702 oneliner
+" todo - find a way to not bitch about these but still fix them with pep8
+"let g:pymode_lint_ignore = "E702,E265"
 "let g:pymode_breakpoint = 0 "\b is ok
+"
+" Gist
+" let g:gist_clip_command = 'pbcopy'
+ let g:gist_detect_filetype = 1
+ let g:gist_post_private = 1
+
 
 "Tagbar
 let g:tagbar_width = 40
@@ -324,4 +330,10 @@ EOF_PY
     command! Pxml :python pretty_it('xml')
     command! Pjson :python pretty_it('json')
 endif
+
+"https://unix.stackexchange.com/questions/60189/how-to-search-the-current-word-in-all-opened-tabs-in-vim
+"" enables to search in all open buffers with :Search <pattern>
+"command! -nargs=1 Search call setqflist([]) | silent bufdo grepadd! <args> %
+"nnoremap <left>  :cprev<cr>zvzz
+"nnoremap <right> :cnext<cr>zvzz
 
