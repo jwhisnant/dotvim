@@ -12,8 +12,8 @@ endif
 
 "deprecated or uninteresting
 call add(g:pathogen_disabled, 'pyflakes-vim') "use pythonmode
-call add(g:pathogen_disabled, 'unimpaired') "we dont need no stinkin brackets
-call add(g:pathogen_disabled, 'airline') "use the nedbat
+"call add(g:pathogen_disabled, 'unimpaired') "we dont need no stinkin brackets
+call add(g:pathogen_disabled, 'airline') "use the nedbat method instead
 call add(g:pathogen_disabled, 'powerline') "steep requirements,skip it
 call add(g:pathogen_disabled, 'gist') "use Gist instead
 
