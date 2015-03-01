@@ -44,10 +44,10 @@ ycm_client_support.[so|pyd|dll] and ycm_core.[so|pyd|dll] not detected; you need
 cd $HOME/.vim/bundle/YouCompleteMe
 # get third party requirements
 git submodule update --init --recursive
- 
- #you may already have these installed
- sudo apt-get install build-essential cmake
- sudo apt-get install python-dev
+
+#you may already have these installed
+sudo apt-get install build-essential cmake
+sudo apt-get install python-dev
 
  ./install.sh
  ```
