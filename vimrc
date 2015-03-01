@@ -28,6 +28,18 @@ call pathogen#helptags()
 filetype plugin indent on
 syntax on
 
+"CUSTOM USER SETTINGS
+"Ultisnip contact info
+call custom#contact()
+
+"let g:snips_author=''
+"let g:author=''
+"let g:snips_email=''
+"let g:email=''
+"let g:snips_github=''
+"let g:github=''
+
+"
 "256 colors http://robotsrule.us/vim/
 set t_Co=256
 
@@ -36,16 +48,16 @@ if has("autocmd")
 endif
 
 "hotkeys and rebindings
-noremap <F5> :GundoToggle<CR>
-"check
-noremap <F7> :PymodeLint<CR>
-"fix
-noremap <F8> :PymodeLintAuto<CR>
+"function keys
+noremap <F5> :GundoToggle<CR> 
+noremap <F7> :PymodeLint<CR> 
+noremap <F8> :PymodeLintAuto<CR> 
 
+"normal keys
 nnoremap <space> za
 vnoremap <space> zf
 
-"colors ka ka ka kolors
+"colors
 set background=dark
 color sorcerer
 "color jellybeans
@@ -53,13 +65,12 @@ color sorcerer
 "color ingretu
 "color colorful256
 
-" does not work, hacked the original
-"let g:VCSCommandSplit='vertical'
-"augroup VCSCommand
-"    if &diff
-"        au VCSCommand User VCSBufferCreated :wincmd L<cr>
-"    endif
-"augroup END
+"To highlight all search matches in a file, set the following option: 
+set hlsearch
+
+"If you prefer backspace and delete in Insert mode to have the old behavior,
+"put this line in your vimrc:
+inoremap ^? ^H
 
 set listchars=tab:>-,eol:$,trail:-      " When in show-all-chars mode (set list), use >-- for tabs.
 set tabstop=8                           " Real tab characters take up 8 spaces
@@ -85,45 +96,38 @@ set visualbell t_vb=                    "   and don't flash either.
 "set mouse=a                             " Mice are wonderful.
 set fillchars=vert:\ ,fold:-            " Spaces are enough for vertical split separators.
 
-set laststatus=2                        " Always show a status line
-let filestatus = ''
-let filestatus .= ' %1*%{&readonly ? "" : &modified ? " + " : &modifiable ? "" : " - "}%*'
-let filestatus .= '%3*%{&readonly ? (&modified ? " + " : " . ") : ""}%*'
-let filestatus .= '%{&readonly? "" : &modified ? "" : &modifiable ? "   " : ""}'
-let filestatus .= ' %<%f  '
-let filestatus .= '%2*%{tagbar#currenttag(" %s ", "", "f")}%*'
-let filestatus .= ' %{fugitive#statusline()}'
-let filestatus .= '%='
-let filestatus .= '%{strlen(&filetype) ? &filetype : "none"}'
-let filestatus .= ' [%{strpart(&fileencoding,0,1)}%{strpart(&fileformat,0,1)}]'
-let filestatus .= '%6l,%2c'
-let filestatus .= '  %P '
-let &statusline = filestatus
+"set laststatus=2                        " Always show a status line
+"let filestatus = ''
+"let filestatus .= ' %1*%{&readonly ? "" : &modified ? " + " : &modifiable ? "" : " - "}%*'
+"let filestatus .= '%3*%{&readonly ? (&modified ? " + " : " . ") : ""}%*'
+"let filestatus .= '%{&readonly? "" : &modified ? "" : &modifiable ? "   " : ""}'
+"let filestatus .= ' %<%f  '
+"let filestatus .= '%2*%{tagbar#currenttag(" %s ", "", "f")}%*'
+"let filestatus .= ' %{fugitive#statusline()}'
+"let filestatus .= '%='
+"let filestatus .= '%{strlen(&filetype) ? &filetype : "none"}'
+"let filestatus .= ' [%{strpart(&fileencoding,0,1)}%{strpart(&fileformat,0,1)}]'
+"let filestatus .= '%6l,%2c'
+"let filestatus .= '  %P '
+"let &statusline = filestatus
 
-" ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" Ultisnips
+"let g:UltiSnipsExpandTrigger="<tab>" "YCM uses tab
+"let g:UltiSnipsJumpForwardTrigger="<tab>" "YCM uses tab
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-
-" Snippets variables some things use these ...
-let g:snips_author='James Whisnant'
-let g:author='James Whisnant'
-let g:snips_email='jwhisnant@gmail.com'
-let g:email='jwhisnant@gmail.com'
-let g:snips_github='https://github.com/jwhisnant'
-let g:github='https://github.com/jwhisnant'
 
 " For full syntax highlighting:
 "let python_highlight_all=1
 "syntax on
 
 "let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
-" pylint unable to import  -yes so kick to kurb
-"let g:syntastic_python_checkers=['python', 'pep8', 'flake8', 'pylint', 'pyflakes'] 
-"'pyflakes' "'pylint'
 
 set visualbell t_vb=
 set backspace=2 " make backspace work like most other apps
@@ -131,124 +135,63 @@ set tabstop=4
 set expandtab
 set softtabstop=4
 set number
-set shiftwidth=4
 
 " a python file is a python file ....
 " I know this is silly but something with # as first char in a script things break
 "au BufRead,BufNewFile *.py set filetype=python
 
-"james python settings
-au BufRead,BufNewFile *.py,*pyw set tabstop=4
-au BufRead,BufNewFile *.py,*pyw set expandtab
-au BufRead,BufNewFile *.py,*pyw set softtabstop=4
+"On file open and FileRead
+au BufRead,BufNewFile *.md set filetype=markdown "silly modular
 
-"If you prefer backspace and delete in Insert mode to have the old behavior,
-"put this line in your vimrc:
-inoremap ^? ^H
-
-" Number of spaces to use for an indent.
-" This will affect Ctrl-T and 'autoindent'.
-" Python: 4 spaces
-" C: 8 spaces (pre-existing files) or 4 spaces (new files)
-au BufRead,BufNewFile *.py,*pyw,*.js set shiftwidth=4
-au BufRead *.c,*.h set shiftwidth=4
-au BufNewFile *.c,*.h set shiftwidth=4
-
-" Number of spaces that a pre-existing tab is equal to.
-" For the amount of space used for a new tab use shiftwidth.
-" Python: 8
-" C: 8
-
-" Replace tabs with the equivalent number of spaces.
-" Also have an au for Makefiles since they require hard tabs.
-" Python: yes
-" C: no
-" Makefile: no
-au BufRead,BufNewFile *.py,*.pyw set expandtab
-au BufRead,BufNewFile *.c,*.h set noexpandtab
-au BufRead,BufNewFile Makefile* set noexpandtab
-
-"au BufRead,BufNewFile *.xml,*.pt,*.zcml,*.kss,*.css set expandtab
-
-
-" Use the below highlight group when displaying bad whitespace is desired
-highlight BadWhitespace ctermbg=red guibg=red
-
-" Display tabs at the beginning of a line in Python mode as bad.
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-" Make trailing whitespace be flagged as bad.
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
-"au BufRead,BufNewFile *.xml,*.pt,*.zcml match BadWhitespace /\s\+$/
-
-" Wrap text after a certain number of characters
-" Python: 79 
-" C: 79
-
-" Turn off settings in 'formatoptions' relating to comment formatting.
-" - c : do not automatically insert the comment leader when wrapping based on
-"    'textwidth'
-" - o : do not insert the comment leader when using 'o' or 'O' from command mode
-" - r : do not insert the comment leader when hitting <Enter> in insert mode
-" Python: not needed
-" C: prevents insertion of '*' at the beginning of every line in a comment
-au BufRead,BufNewFile *.c,*.h set formatoptions-=c formatoptions-=o formatoptions-=r
-
-" Use UNIX (\n) line endings.
-" Only used for new files so as to not force existing files to change their
-" line endings.
-" Python: yes
-" C: yes
-au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
-
-
-" ----------------------------------------------------------------------------
-" The following section contains suggested settings.  While in no way required
-" to meet coding standards, they are helpful.
-
-" Set the default file encoding to UTF-8: ``set encoding=utf-8``
-set encoding=utf-8 
-" Puts a marker at the beginning of the file to differentiate between UTF and
-" UCS encoding (WARNING: can trick shells into thinking a text file is actually
-" a binary file when executing the text file): ``set bomb``
 "
-"au BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class 
+"python settings
+au BufRead,BufNewFile *.py,*pyw set tabstop=4 expandtab softtabstop=4
+
+" Dont expand tabs in C type files
+au BufRead,BufNewFile *.py,*.pyw set expandtab
+au BufRead,BufNewFile *.c,*.h Makefile* set noexpandtab
+
+
+" Highlight spaces and tabs as bad in python files
+highlight BadWhitespace ctermbg=red guibg=red
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/ "tabs bad beginning python lines
+
+
+au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix " unix line ends
+
+set encoding=utf-8 " utf-8
+
+"Odd filetypes
 "set up us the mapping of file types ..
 au BufRead,BufNewFile *.zcml :set ft=xml 
 au BufRead,BufNewFile *.kss :set ft=css
 
-"To highlight all search matches in a file, set the following option: 
-set hlsearch
-
 "" Number for the xml and zcml and pt files - seems to be 2 ...
-au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set nocompatible
-au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set tabstop=2
-au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set shiftwidth=2
-au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set softtabstop=2
-au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css set expandtab
-
-
-"pymode
-"let g:pymode = 0
-"let g:pymode_lint = 0
-
-"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe'] "default
-"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint', 'pep257']
+au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " options
 let g:pymode_folding = 0
 let g:pymode_options_max_line_length = 100
 
+" Pymode
+
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe'] "default
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint', 'pep257']
+
+"
+" DIAF rope
 " Complete keywords from not imported modules (could make completion slower)
-" could take, like forever
-""rope
 let g:pymode_rope = 0
 let g:pymode_rope_autoimport = 0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope_project_root = '/dev/null/'
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_autoimport = 0
+let g:pymode_rope_autoimport_modules = []
+let g:pymode_rope_autoimport_import_after_complete = 0
 
-"
-" Pymode
+" Normal settings
 let g:pymode_folding = 0
 let g:pymode_syntax = 1
 let g:pymode_syntax_slow_sync = 1
@@ -268,12 +211,11 @@ let g:pymode_rope_complete_on_dot = 0
 " todo - find a way to not bitch about these but still fix them with pep8
 "let g:pymode_lint_ignore = "E702,E265"
 "let g:pymode_breakpoint = 0 "\b is ok
-"
+
 " Gist
-" let g:gist_clip_command = 'pbcopy'
+" let g:gist_clip_command = 'pbcopy' "this is a Mac thing
  let g:gist_detect_filetype = 1
  let g:gist_post_private = 1
-
 
 "Tagbar
 let g:tagbar_width = 40
@@ -292,7 +234,7 @@ noremap <silent> <Leader><tab> :MBEbb<CR>
 
 "let g:miniBufExplorerAutoStart = 0          " Open MBE manually when needed.
 let g:miniBufExplTabWrap = 1                " Don't break a minibuf tab across lines
-let g:miniBufExplBuffersNeeded = 4          " start ASAP
+let g:miniBufExplBuffersNeeded = 4          " start later
 let g:miniBufExplVSplit = 20                " Make minibuf explorer vertical
 let g:did_minibufexplorer_syntax_inits = 1  " Use my colors.
 let g:miniBufExplCycleArround = 1           " Cycle when doing buffer movement.
@@ -336,4 +278,63 @@ endif
 "command! -nargs=1 Search call setqflist([]) | silent bufdo grepadd! <args> %
 "nnoremap <left>  :cprev<cr>zvzz
 "nnoremap <right> :cnext<cr>zvzz
+
+"YouCompleteMe
+let g:ycm_min_num_of_chars_for_completion = 2
+
+"YCM and Ultisnips
+"
+"https://vimeo.com/93364612
+"https://github.com/Valloric/YouCompleteMe/issues/36#issuecomment-15451411
+"UltiSnips completion function that tries to expand a snippet. If there's no
+"snippet for expanding, it checks for completion window and if it's
+"shown, selects first element. If there's no completion window it tries to
+"jump to next placeholder. If there's no placeholder it just returns TAB key 
+
+function! g:UltiSnips_Complete()
+    "call UltiSnips_ExpandSnippet() "Deprecated UltiSnips_ExpandSnippet called. Please use UltiSnips#ExpandSnippet
+    call UltiSnips#ExpandSnippet()
+
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            "Deprecated UltiSnips_JumpForwards called. Please use UltiSnips#JumpForwards.
+            "call UltiSnips_JumpForwards()
+            UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction"
+
+" we need this here because of have .vimrc is loaded to get the above to work
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+" does not work, hacked the original
+"let g:VCSCommandSplit='vertical'
+"augroup VCSCommand
+"    if &diff
+"        au VCSCommand User VCSBufferCreated :wincmd L<cr>
+"    endif
+"augroup END
+
+"airline
+"
+
+let g:airline_theme='serene'
+"let g:airline_left_sep='>'
+"let g:airline_right_sep='<'
+"let g:airline_detect_modified=1
+"let g:airline_detect_paste=1
+"let g:airline_detect_iminsert=0
+"let g:airline_inactive_collapse=1
+""let g:airline_powerline_fonts=1
+"let g:airline_mode_map = {} " see source for the defaults
+"let g:airline_exclude_filenames = [] " see source for current list
+"let g:airline_exclude_filetypes = [] " see source for current list
+"let g:airline_exclude_preview = 0
+"let w:airline_disabled = 1
 
