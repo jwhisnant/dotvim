@@ -107,6 +107,8 @@ syntax on
 call custom#contact()
 call custom#sqlsetup()
 
+"http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings
+call custom#numpad()
 
 "let g:snips_author=''
 "let g:author=''
