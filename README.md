@@ -19,7 +19,7 @@ export TERM=xterm-256color
 
 ### Clone
 
-git clone https://github.com/jwhisnant/dotvim.git .vim
+git clone https://github.com/jwhisnant/dotvim.git.vim
 
 ### Install submodules
 
