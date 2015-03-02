@@ -48,13 +48,13 @@ git submodule update --init --recursive
 #you may already have these installed
 sudo apt-get install build-essential cmake
 sudo apt-get install python-dev
+./install.sh
+```
 
- ./install.sh
- ```
+### Create symlink to .vimrc
+```sh
+cd $HOME
+ln -s .vim/vimrc .vimrc
+```
 
- ### Create symlink to .vimrc
- ```sh
- cd $HOME
- ln -s .vim/vimrc .vimrc
- ```
 
