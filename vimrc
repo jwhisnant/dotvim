@@ -8,59 +8,93 @@ filetype off                   " required!
  call vundle#begin()
 
 " let Vundle manage Vundle, required
+" setup
 Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree.git'
+
+"utility
 Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'Wolfy87/vim-enmasse'
 Plugin 'farseer90718/vim-taskwarrior'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'rking/ag.vim'
+Plugin 'scratch.vim'
+
+" vcs
+Plugin 'airblade/vim-gitgutter'
+Plugin 'git://repo.or.cz/vcscommand'
+Plugin 'tpope/vim-fugitive'
+
+" navigate
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'fholgado/minibufexpl.vim'
+
+"look and feel
+Plugin 'flazz/vim-colorschemes'
+Plugin 'bling/vim-airline'
+
+"lint and syntax highlighting
+Plugin 'scrooloose/syntastic'
+Plugin 'klen/python-mode'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'majutsushi/tagbar'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'chrisgillis/vim-bootstrap3-snippets'
-Plugin 'klen/python-mode'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'rking/ag.vim'
-Plugin 'vim-scripts/Gist.vim'
+Plugin 'valloric/MatchTagAlways'
+Plugin 'pangloss/vim-javascript'
+
+"Github like
 Plugin 'mattn/webapi-vim'
-Plugin 'bling/vim-airline'
+Plugin 'jaxbot/github-issues.vim'
+Plugin 'vim-scripts/Gist.vim'
+
+"mysql
 Plugin 'krisajenkins/vim-pipe'
 Plugin 'vim-scripts/dbext.vim'
+Plugin 'vim-scripts/SQLComplete.vim'
+
+" tmux
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'kikijump/tslime.vim'
+Plugin 'edkolev/tmuxline.vim'
+
+"maybe ...
+"Plugin 'marijnh/tern_for_vim.git' "js
+"Plugin 'ervandew/supertab'
+"Plugin 'jeffkreeftmeijer/vim-numbertoggle' " Relative numbers in normal mode
 
 "YouCompleteMe unavailable: requires Vim 7.3.584+
 if v:version > '704' 
     Plugin 'Valloric/YouCompleteMe'
 endif
 
+" vim-javascript fix for old vims
+ "if v:version < '704' 
+    ":set regexpengine=1
+    ":syntax enable
+"endif
+
+"marsupials
+set ttyfast
 
 " All of your Plugins must be added before the following line
  call vundle#end()            " required
  filetype plugin indent on    " required
 
-"
-"
-"
-"disable before infect
-"let g:pathogen_disabled = []
-""deprecated or uninteresting
-"call add(g:pathogen_disabled, 'pyflakes-vim') "use pythonmode
-""call add(g:pathogen_disabled, 'unimpaired') "we dont need no stinkin brackets
-"call add(g:pathogen_disabled, 'airline') "use the nedbat method instead
-"call add(g:pathogen_disabled, 'powerline') "steep requirements,skip it
-"call add(g:pathogen_disabled, 'gist') "use Gist instead
+" Persistent undo.
+ set undofile
+ set undodir=~/.vim/undo
+ set undolevels=1000
+ set undoreload=10000
 
-"infect
-"call pathogen#infect()
-"call pathogen#helptags()
+ " Becomming root to save a document, just type `w!!`
+ cmap w!! %!sudo tee > /dev/null %
 
-"commented - we want to try tidy for xml with syntastic
-let g:syntastic_ignore_files = ['\.py$'] "pymode instead
+"Pymode do python not syntastic
+"let g:syntastic_ignore_files = ['\.py$'] "pymode instead
 
 "python-mode wants
 filetype plugin indent on
@@ -69,6 +103,8 @@ syntax on
 "CUSTOM USER SETTINGS
 "Ultisnip contact info
 call custom#contact()
+call custom#sqlsetup()
+
 
 "let g:snips_author=''
 "let g:author=''
@@ -91,9 +127,9 @@ noremap <F5> :GundoToggle<CR>
 noremap <F7> :PymodeLint<CR> 
 noremap <F8> :PymodeLintAuto<CR> 
 
-"normal keys
-nnoremap <space> za
-vnoremap <space> zf
+"normal keys - this might mess up quickfix
+"nnoremap <space> za
+"vnoremap <space> zf
 
 "colors
 set background=dark
@@ -149,6 +185,18 @@ set laststatus=2                        " Always show a status line
 "let filestatus .= '  %P '
 "let &statusline = filestatus
 
+"ctrlp
+"create a cache to optomize and use ag
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/vendor/*,*/\.git/*
+let g:ctrlp_custom_ignore = 'tmp$\|\.git$\|\.hg$\|\.svn$\|.rvm$|.bundle$\|vendor\|'
+let g:ctrlp_clear_cache_on_exit=0
+
+" this will not work with wildcards above, must use glob
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>" "YCM uses tab
 let g:UltiSnipsJumpForwardTrigger="<tab>" "YCM uses tab
@@ -177,6 +225,8 @@ set number
 "On file open and FileRead
 au BufRead,BufNewFile *.md set filetype=markdown "silly modular
 
+au BufNewFile,BufRead *.sql set filetype=sql
+
 "
 "python settings
 au BufRead,BufNewFile *.py,*pyw set tabstop=4 expandtab softtabstop=4
@@ -192,7 +242,6 @@ au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/ "tabs bad beginning
 
 
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix " unix line ends
-
 set encoding=utf-8 " utf-8
 
 "Odd filetypes
@@ -262,6 +311,21 @@ let g:tagbar_autoclose = 1
 let g:tagbar_iconchars = ['+', '-']
 nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
+
+"set SQL DBext defaults
+"
+"https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
+" MySQL
+ "let g:dbext_default_profile_mysql_local ='type=MYSQL:user=clear:passwd=`cat $HOME/sql_pw.txt`:dbname=peoplesoft_files'
+
+"" SQLite
+ "let g:dbext_default_profile_sqlite_for_rails = 'type=SQLITE:dbname=/path/to/my/sqlite.db'
+""
+"" " Microsoft SQL Server
+ "let g:dbext_default_profile_microsoft_production = 'type=SQLSRV:user=sa:passwd=whatever:host^=localhost'
+""
+
+
 " Minibufexplorer
 noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
 noremap <silent> <Leader><tab> :MBEbb<CR>
@@ -274,6 +338,23 @@ let g:did_minibufexplorer_syntax_inits = 1  " Use my colors.
 let g:miniBufExplCycleArround = 1           " Cycle when doing buffer movement.
 "let g:miniBufExplShowBufNumbers = 0         " Don't show buffer numbers.
 
+"https://unix.stackexchange.com/questions/60189/how-to-search-the-current-word-in-all-opened-tabs-in-vim
+"" enables to search in all open buffers with :Search <pattern>
+"command! -nargs=1 Search call setqflist([]) | silent bufdo grepadd! <args> %
+"nnoremap <left>  :cprev<cr>zvzz
+"nnoremap <right> :cnext<cr>zvzz
+
+"airline
+let g:airline_theme='simple'
+"let g:airline_theme='raven'
+"let g:airline_theme='dark'
+"let g:airline_theme='ubaryd'
+"let g:airline_theme='bubblegum'
+"let g:airline_theme='wombat'
+"let g:airline_theme='serene'
+"
+"
+"stuff at the end ...
 
 " Custom formatters
 if has("python")
@@ -307,59 +388,6 @@ EOF_PY
     command! Pjson :python pretty_it('json')
 endif
 
-"https://unix.stackexchange.com/questions/60189/how-to-search-the-current-word-in-all-opened-tabs-in-vim
-"" enables to search in all open buffers with :Search <pattern>
-"command! -nargs=1 Search call setqflist([]) | silent bufdo grepadd! <args> %
-"nnoremap <left>  :cprev<cr>zvzz
-"nnoremap <right> :cnext<cr>zvzz
-
-"airline
-let g:airline_theme='simple'
-"let g:airline_theme='raven'
-"let g:airline_theme='dark'
-"let g:airline_theme='ubaryd'
-"let g:airline_theme='bubblegum'
-"let g:airline_theme='wombat'
-"let g:airline_theme='serene'
-"
-"
-"let g:airline_theme='murmur'
-"let g:airline_theme='molokai'
-"let g:airline_theme='lucius'
-"
-""let g:airline_theme='badwolf'
-""let g:airline_theme='base16'
-"let g:airline_theme='durant'
-""let g:airline_theme='hybrid'
-""let g:airline_theme='jellybeans'
-""let g:airline_theme='kalisi'
-""let g:airline_theme='kolor'
-"""let g:airline_theme='laederon'
-"""let g:airline_theme='light'
-"""""let g:airline_theme='luna'
-"""let g:airline_theme='monochrome'
-"""let g:airline_theme='powerlineish'
-"""let g:airline_theme='silver'
-"""""let g:airline_theme='solarized'
-""""let g:airline_theme='sol'
-""let g:airline_theme='tomorrow'
-""let g:airline_theme='understated'
-"""""let g:airline_theme='zenburn'
-
-"let g:airline_left_sep='>'
-"let g:airline_right_sep='<'
-"let g:airline_detect_modified=1
-"let g:airline_detect_paste=1
-"let g:airline_detect_iminsert=0
-"let g:airline_inactive_collapse=1
-""let g:airline_powerline_fonts=1
-"let g:airline_mode_map = {} " see source for the defaults
-"let g:airline_exclude_filenames = [] " see source for current list
-"let g:airline_exclude_filetypes = [] " see source for current list
-"let g:airline_exclude_preview = 0
-"let w:airline_disabled = 1
-
-"stuff at the end ...
 
 "YouCompleteMe
 "let g:ycm_min_num_of_chars_for_completion = 2
