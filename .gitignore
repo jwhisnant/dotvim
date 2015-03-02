@@ -36,4 +36,4 @@ var/
 *.swo
 
 bundle
-
+custom.vim

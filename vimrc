@@ -19,7 +19,6 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'ggreer/the_silver_searcher'
 Plugin 'Wolfy87/vim-enmasse'
 Plugin 'farseer90718/vim-taskwarrior'
 Plugin 'tpope/vim-unimpaired'
@@ -30,6 +29,9 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'rking/ag.vim'
 Plugin 'vim-scripts/Gist.vim'
 Plugin 'mattn/webapi-vim'
+Plugin 'bling/vim-airline'
+Plugin 'krisajenkins/vim-pipe'
+Plugin 'vim-scripts/dbext.vim'
 
 "YouCompleteMe unavailable: requires Vim 7.3.584+
 if v:version > '704' 
@@ -132,7 +134,7 @@ set visualbell t_vb=                    "   and don't flash either.
 "set mouse=a                             " Mice are wonderful.
 set fillchars=vert:\ ,fold:-            " Spaces are enough for vertical split separators.
 
-"set laststatus=2                        " Always show a status line
+set laststatus=2                        " Always show a status line
 "let filestatus = ''
 "let filestatus .= ' %1*%{&readonly ? "" : &modified ? " + " : &modifiable ? "" : " - "}%*'
 "let filestatus .= '%3*%{&readonly ? (&modified ? " + " : " . ") : ""}%*'
@@ -266,7 +268,7 @@ noremap <silent> <Leader><tab> :MBEbb<CR>
 
 "let g:miniBufExplorerAutoStart = 0          " Open MBE manually when needed.
 let g:miniBufExplTabWrap = 1                " Don't break a minibuf tab across lines
-let g:miniBufExplBuffersNeeded = 4          " start later
+"let g:miniBufExplBuffersNeeded = 4          " start later
 let g:miniBufExplVSplit = 20                " Make minibuf explorer vertical
 let g:did_minibufexplorer_syntax_inits = 1  " Use my colors.
 let g:miniBufExplCycleArround = 1           " Cycle when doing buffer movement.
@@ -312,7 +314,38 @@ endif
 "nnoremap <right> :cnext<cr>zvzz
 
 "airline
-let g:airline_theme='serene'
+let g:airline_theme='simple'
+"let g:airline_theme='raven'
+"let g:airline_theme='dark'
+"let g:airline_theme='ubaryd'
+"let g:airline_theme='bubblegum'
+"let g:airline_theme='wombat'
+"let g:airline_theme='serene'
+"
+"
+"let g:airline_theme='murmur'
+"let g:airline_theme='molokai'
+"let g:airline_theme='lucius'
+"
+""let g:airline_theme='badwolf'
+""let g:airline_theme='base16'
+"let g:airline_theme='durant'
+""let g:airline_theme='hybrid'
+""let g:airline_theme='jellybeans'
+""let g:airline_theme='kalisi'
+""let g:airline_theme='kolor'
+"""let g:airline_theme='laederon'
+"""let g:airline_theme='light'
+"""""let g:airline_theme='luna'
+"""let g:airline_theme='monochrome'
+"""let g:airline_theme='powerlineish'
+"""let g:airline_theme='silver'
+"""""let g:airline_theme='solarized'
+""""let g:airline_theme='sol'
+""let g:airline_theme='tomorrow'
+""let g:airline_theme='understated'
+"""""let g:airline_theme='zenburn'
+
 "let g:airline_left_sep='>'
 "let g:airline_right_sep='<'
 "let g:airline_detect_modified=1
@@ -326,8 +359,7 @@ let g:airline_theme='serene'
 "let g:airline_exclude_preview = 0
 "let w:airline_disabled = 1
 
-"stuff the end ...
-
+"stuff at the end ...
 
 "YouCompleteMe
 "let g:ycm_min_num_of_chars_for_completion = 2
