@@ -33,6 +33,8 @@ Plugin 'fholgado/minibufexpl.vim'
 "look and feel
 Plugin 'flazz/vim-colorschemes'
 Plugin 'bling/vim-airline'
+"Plugin 'itchyny/lightline.vim'
+Plugin 'ryanoasis/vim-webdevicons'
 
 "lint and syntax highlighting
 Plugin 'scrooloose/syntastic'
@@ -77,12 +79,12 @@ endif
     ":syntax enable
 "endif
 
-"marsupials
-set ttyfast
-
 " All of your Plugins must be added before the following line
  call vundle#end()            " required
  filetype plugin indent on    " required
+
+"marsupials
+set ttyfast
 
 " Persistent undo.
  set undofile
@@ -94,7 +96,7 @@ set ttyfast
  cmap w!! %!sudo tee > /dev/null %
 
 "Pymode do python not syntastic
-"let g:syntastic_ignore_files = ['\.py$'] "pymode instead
+let g:syntastic_ignore_files = ['\.py$'] "pymode instead
 
 "python-mode wants
 filetype plugin indent on
@@ -123,6 +125,14 @@ endif
 
 "hotkeys and rebindings
 "function keys
+
+" Remove annoying F1 help.
+inoremap <F1> <nop>
+nnoremap <F1> <nop>
+vnoremap <F1> <nop>
+
+noremap <F1> :MBEToggle<CR> 
+noremap <F2> :NERDTreeToggle<CR>
 noremap <F5> :GundoToggle<CR> 
 noremap <F7> :PymodeLint<CR> 
 noremap <F8> :PymodeLintAuto<CR> 
@@ -188,8 +198,8 @@ set laststatus=2                        " Always show a status line
 "ctrlp
 "create a cache to optomize and use ag
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/vendor/*,*/\.git/*
-let g:ctrlp_custom_ignore = 'tmp$\|\.git$\|\.hg$\|\.svn$\|.rvm$|.bundle$\|vendor\|'
+"set wildignore+=*/env*,*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/vendor/*,*/\.git/*
+"let g:ctrlp_custom_ignore = 'tmp$\|\.git$\|\.hg$\|\.svn$\|.rvm$|.bundle$\|vendor\|'
 let g:ctrlp_clear_cache_on_exit=0
 
 " this will not work with wildcards above, must use glob
@@ -330,7 +340,7 @@ nnoremap <silent> <Leader>t :TagbarToggle<CR>
 noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
 noremap <silent> <Leader><tab> :MBEbb<CR>
 
-"let g:miniBufExplorerAutoStart = 0          " Open MBE manually when needed.
+let g:miniBufExplorerAutoStart = 0          " Open MBE manually when needed.
 let g:miniBufExplTabWrap = 1                " Don't break a minibuf tab across lines
 "let g:miniBufExplBuffersNeeded = 4          " start later
 let g:miniBufExplVSplit = 20                " Make minibuf explorer vertical
