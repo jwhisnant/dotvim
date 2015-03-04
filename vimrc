@@ -63,6 +63,9 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kikijump/tslime.vim'
 Plugin 'edkolev/tmuxline.vim'
 
+Plugin 'alfredodeza/pytest.vim'
+Plugin 'nvie/vim-togglemouse'
+
 "maybe ...
 "Plugin 'marijnh/tern_for_vim.git' "js
 "Plugin 'ervandew/supertab'
@@ -136,8 +139,10 @@ vnoremap <F1> <nop>
 noremap <F1> :MBEToggle<CR> 
 noremap <F2> :NERDTreeToggle<CR>
 noremap <F5> :GundoToggle<CR> 
-noremap <F7> :PymodeLint<CR> 
+noremap <F7> :PymodeLint<CR> :lopen<CR>
 noremap <F8> :PymodeLintAuto<CR> 
+
+"F12 is mapped to MouseToggle
 
 "normal keys - this might mess up quickfix
 "nnoremap <space> za
@@ -179,7 +184,6 @@ set ignorecase smartcase                " If all lower-case, match any case, els
 set virtualedit=onemore                 " One virtual character at the ends of lines, makes ^V work properly.
 set noerrorbells                        " Don't ring the bell on errors
 set visualbell t_vb=                    "   and don't flash either.
-"set mouse=a                             " Mice are wonderful.
 set fillchars=vert:\ ,fold:-            " Spaces are enough for vertical split separators.
 
 set laststatus=2                        " Always show a status line
@@ -196,6 +200,10 @@ set laststatus=2                        " Always show a status line
 "let filestatus .= '%6l,%2c'
 "let filestatus .= '  %P '
 "let &statusline = filestatus
+
+"mouse for resize window inside screen
+set ttymouse=xterm2
+"set mouse=n                             " Mice are wonderful, but only to resize my windows
 
 "ctrlp
 "create a cache to optomize and use ag
@@ -230,16 +238,12 @@ set expandtab
 set softtabstop=4
 set number
 
-" a python file is a python file ....
-" I know this is silly but something with # as first char in a script things break
-"au BufRead,BufNewFile *.py set filetype=python
+"autocmd VimEnter * :ToggleMouse() "turn off mouse by default, does not work
 
 "On file open and FileRead
 au BufRead,BufNewFile *.md set filetype=markdown "silly modular
-
 au BufNewFile,BufRead *.sql set filetype=sql
 
-"
 "python settings
 au BufRead,BufNewFile *.py,*pyw set tabstop=4 expandtab softtabstop=4
 
@@ -247,11 +251,16 @@ au BufRead,BufNewFile *.py,*pyw set tabstop=4 expandtab softtabstop=4
 au BufRead,BufNewFile *.py,*.pyw set expandtab
 au BufRead,BufNewFile *.c,*.h Makefile* set noexpandtab
 
-
 " Highlight spaces and tabs as bad in python files
 highlight BadWhitespace ctermbg=red guibg=red
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/ "tabs bad beginning python lines
 
+" http://vim.wikia.com/wiki/How_to_not_move_cursor_when_selecting_window_with_mouse
+"augroup NO_CURSOR_MOVE_ON_FOCUS
+"au!
+"au FocusLost * let g:oldmouse=&mouse | set mouse=
+    "au FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
+"augroup END
 
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix " unix line ends
 set encoding=utf-8 " utf-8
@@ -293,14 +302,15 @@ let g:pymode_syntax_slow_sync = 1
 let g:pymode_syntax_all = 1
 let g:pymode_motion = 1
 let g:pymode_trim_whitespaces = 0
-let g:pymode_lint_on_write = 0
+let g:pymode_lint_on_write = 1
 "let g:pymode_lint_unmodified = 1 " check on save (every)
 let g:pymode_syntax_string_formatting = 1
 let g:pymode_syntax_string_format = 1
 let g:pymode_syntax_string_templates = 1
 let g:pymode_syntax_doctests = 1
-let g:pymode_rope = 0
-let g:pymode_rope_complete_on_dot = 0
+let g:pymode_lint_cwindow = 0 "Auto open cwindow (quickfix) if any errors have been found
+
+let NERDTreeIgnore = ['\.pyc$']
 
 "E256 comma space "E702 oneliner
 " todo - find a way to not bitch about these but still fix them with pep8
@@ -325,6 +335,8 @@ nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
 
 "set SQL DBext defaults
+:let  g:dbext_default_history_size = 4096
+<
 "
 "https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
 " MySQL
