@@ -109,6 +109,14 @@ set ttyfast
 let g:syntastic_python_flake8_args='--ignore=E501,702' "ignore long lines and one-liners
 let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
 
+"Flake8 is a wrapper around these tools: PyFlakes,  pep8, Ned Batchelder’s McCabe script
+"Available checkers: flake8 pep8 pyflakes pylint python
+"Currently enabled checkers: python flake8 pylint
+"I dont think I want mccabe
+let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
+"let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
+
+
 "python-mode wants
 filetype plugin indent on
 syntax on
@@ -243,7 +251,7 @@ let g:UltiSnipsEditSplit="vertical"
 "let python_highlight_all=1
 "syntax on
 
-"let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
 
 set visualbell t_vb=
 set backspace=2 " make backspace work like most other apps
@@ -294,8 +302,10 @@ au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabsto
 let g:autopep8_max_line_length=120 "E501
 let g:autopep8_ignore="E226,E24,W6,E702" 
 "let g:autopep8_disable_show_diff=1 "Disable show diff window
+let g:syntastic_debug = 32
 
 " Pymode
+let g:pymode_lint = 0 "Turn off code checking
 
 " DIAF rope
 " Complete keywords from not imported modules (could make completion slower)
