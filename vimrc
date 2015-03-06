@@ -18,7 +18,8 @@ Plugin 'Wolfy87/vim-enmasse'
 Plugin 'farseer90718/vim-taskwarrior'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'rking/ag.vim'
-Plugin 'scratch.vim'
+Plugin 'mtth/scratch.vim'
+Plugin 'jmcantrell/vim-virtualenv'
 
 " vcs
 Plugin 'airblade/vim-gitgutter'
@@ -29,6 +30,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'fholgado/minibufexpl.vim'
+Plugin 'majutsushi/tagbar'
 
 "look and feel
 Plugin 'flazz/vim-colorschemes'
@@ -38,17 +40,21 @@ Plugin 'ryanoasis/vim-webdevicons'
 
 "lint and syntax highlighting
 Plugin 'scrooloose/syntastic'
-Plugin 'klen/python-mode'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'majutsushi/tagbar'
+
+Plugin 'klen/python-mode' "disable autopep8 it not work so well
+Plugin 'tell-k/vim-autopep8'
+
 Plugin 'plasticboy/vim-markdown'
 Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'chrisgillis/vim-bootstrap3-snippets'
 Plugin 'valloric/MatchTagAlways'
 Plugin 'pangloss/vim-javascript'
 
-"Github like
+"ultisnips
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'chrisgillis/vim-bootstrap3-snippets'
+
+"Github integration
 Plugin 'mattn/webapi-vim'
 Plugin 'jaxbot/github-issues.vim'
 Plugin 'vim-scripts/Gist.vim'
@@ -56,9 +62,9 @@ Plugin 'vim-scripts/Gist.vim'
 "mysql
 Plugin 'krisajenkins/vim-pipe'
 Plugin 'vim-scripts/dbext.vim'
-Plugin 'vim-scripts/SQLComplete.vim'
+Plugin 'vim-scripts/SQLComplete.vim' "doesnt seem to work
 
-" tmux
+" tmux 14.04
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kikijump/tslime.vim'
 Plugin 'edkolev/tmuxline.vim'
@@ -98,8 +104,10 @@ set ttyfast
  " Becomming root to save a document, just type `w!!`
  cmap w!! %!sudo tee > /dev/null %
 
-"Pymode do python not syntastic
-let g:syntastic_ignore_files = ['\.py$'] "pymode instead
+"Syntastic
+"let g:syntastic_ignore_files = ['\.py$'] "pymode instead
+let g:syntastic_python_flake8_args='--ignore=E501,702' "ignore long lines and one-liners
+let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
 
 "python-mode wants
 filetype plugin indent on
@@ -136,11 +144,17 @@ inoremap <F1> <nop>
 nnoremap <F1> <nop>
 vnoremap <F1> <nop>
 
+"folding
+:set foldmethod=indent
+nnoremap <space> za
+vnoremap <space> zf
+
 noremap <F1> :MBEToggle<CR> 
 noremap <F2> :NERDTreeToggle<CR>
+nmap <F3> :TagbarToggle<CR>
 noremap <F5> :GundoToggle<CR> 
-noremap <F7> :PymodeLint<CR> :lopen<CR>
-noremap <F8> :PymodeLintAuto<CR> 
+"noremap <F7> :PymodeLint<CR>  " we will let syntastic do this instead on file write
+"noremap <F8> :PymodeLintAuto<CR>  "autopep8 maps here by default ...
 
 "F12 is mapped to MouseToggle
 
@@ -242,6 +256,7 @@ set number
 
 "On file open and FileRead
 au BufRead,BufNewFile *.md set filetype=markdown "silly modular
+au BufRead,BufNewFile *.python set filetype=python "python yu no highlight
 au BufNewFile,BufRead *.sql set filetype=sql
 
 "python settings
@@ -273,16 +288,15 @@ au BufRead,BufNewFile *.kss :set ft=css
 "" Number for the xml and zcml and pt files - seems to be 2 ...
 au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
-" options
-let g:pymode_folding = 0
-let g:pymode_options_max_line_length = 100
+"autopep8
+"E702 - one liner with semicolons
+"Do not fix these errors/warnings (default: E226,E24,W6)
+let g:autopep8_max_line_length=120 "E501
+let g:autopep8_ignore="E226,E24,W6,E702" 
+"let g:autopep8_disable_show_diff=1 "Disable show diff window
 
 " Pymode
 
-"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe'] "default
-"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint', 'pep257']
-
-"
 " DIAF rope
 " Complete keywords from not imported modules (could make completion slower)
 let g:pymode_rope = 0
@@ -296,13 +310,14 @@ let g:pymode_rope_autoimport_modules = []
 let g:pymode_rope_autoimport_import_after_complete = 0
 
 " Normal settings
-let g:pymode_folding = 0
+let g:pymode_options_max_line_length = 100
+let g:pymode_folding = 1
 let g:pymode_syntax = 1
 let g:pymode_syntax_slow_sync = 1
 let g:pymode_syntax_all = 1
 let g:pymode_motion = 1
 let g:pymode_trim_whitespaces = 0
-let g:pymode_lint_on_write = 1
+let g:pymode_lint_on_write = 0
 "let g:pymode_lint_unmodified = 1 " check on save (every)
 let g:pymode_syntax_string_formatting = 1
 let g:pymode_syntax_string_format = 1
@@ -311,11 +326,6 @@ let g:pymode_syntax_doctests = 1
 let g:pymode_lint_cwindow = 0 "Auto open cwindow (quickfix) if any errors have been found
 
 let NERDTreeIgnore = ['\.pyc$']
-
-"E256 comma space "E702 oneliner
-" todo - find a way to not bitch about these but still fix them with pep8
-"let g:pymode_lint_ignore = "E702,E265"
-"let g:pymode_breakpoint = 0 "\b is ok
 
 " Gist
 " let g:gist_clip_command = 'pbcopy' "this is a Mac thing
@@ -336,7 +346,7 @@ nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
 "set SQL DBext defaults
 :let  g:dbext_default_history_size = 4096
-<
+
 "
 "https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
 " MySQL
@@ -358,6 +368,7 @@ let g:miniBufExplorerAutoStart = 0          " Open MBE manually when needed.
 let g:miniBufExplTabWrap = 1                " Don't break a minibuf tab across lines
 "let g:miniBufExplBuffersNeeded = 4          " start later
 let g:miniBufExplVSplit = 20                " Make minibuf explorer vertical
+let g:miniBufExplBRSplit = 0                " Put window on left or upper
 let g:did_minibufexplorer_syntax_inits = 1  " Use my colors.
 let g:miniBufExplCycleArround = 1           " Cycle when doing buffer movement.
 "let g:miniBufExplShowBufNumbers = 0         " Don't show buffer numbers.
