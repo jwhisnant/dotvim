@@ -12,44 +12,34 @@ mv .vim dotvim-old
 
 This can make a big difference on what a particular color scheme looks like.
 Do this in the settings for your shell.  (.bashrc, for example)
-```sh
-export TERM=xterm-256color
-```
 
+`export TERM=xterm-256color`
 
-### Clone
+### Clone repository
+`$ git clone https://github.com/jwhisnant/dotvim.git.vim ~.vim`
 
-git clone https://github.com/jwhisnant/dotvim.git.vim
+### Install Vundle [Vundle]
 
-### Install submodules
+Detailed instructions are here:
+But briefly 
+`$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 
-```sh
-cd $HOME/.vim/bundle
-git submodule init
-git submodule update
-cd -
-```
-
-### You may need compile YCM 
-See https://github.com/Valloric/YouCompleteMe for complete instructions.  The compilation for C languages seems to be not worth the source compiling to me at this point.
+### You may need compile You Complete ME
+See [YCM] for complete instructions.  The compilation for C languages seems to be not worth the source compiling to me at this point.
 
 ```sh
 ycm_client_support.[so|pyd|dll] and ycm_core.[so|pyd|dll] not detected; you need to compile YCM before using it. Read the docs!
 ```
 
-
 ### Compile (Ubuntu 14.04) (non C languages)
-```sh
-
-cd $HOME/.vim/bundle/YouCompleteMe
-# get third party requirements
-git submodule update --init --recursive
 
 #you may already have these installed
+```sh
 sudo apt-get install build-essential cmake
 sudo apt-get install python-dev
-./install.sh
 ```
+#install without C support
+`$ cd $HOME/.vim/bundle/YouCompleteMe ; ./install.sh`
 
 ### Create symlink to .vimrc
 ```sh
@@ -57,4 +47,14 @@ cd $HOME
 ln -s .vim/vimrc .vimrc
 ```
 
+### Install linters and other python tools for your OS
 
+These instructions are written for Ubuntu, your mileage may vary.
+
+```sh
+$ sudo apt-get install pip virtualenv virtualenvwrapper
+$ sudo apt-get install pylint pep8
+```
+
+[Vundle]:http://github.com/gmarik/Vundle.vim
+[YCM]:https://github.com/Valloric/YouCompleteMe
