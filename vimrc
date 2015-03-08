@@ -302,7 +302,7 @@ au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabsto
 let g:autopep8_max_line_length=120 "E501
 let g:autopep8_ignore="E226,E24,W6,E702" 
 "let g:autopep8_disable_show_diff=1 "Disable show diff window
-let g:syntastic_debug = 32
+"let g:syntastic_debug = 32
 
 " Pymode
 let g:pymode_lint = 0 "Turn off code checking

@@ -8,12 +8,14 @@ mv .vimrc vimrc-old
 mv .vim dotvim-old
 ```
 
-### Set 256 colors 
+### Set terminal to 256 colors 
 
 This can make a big difference on what a particular color scheme looks like.
 Do this in the settings for your shell.  (.bashrc, for example)
 
-`export TERM=xterm-256color`
+```sh
+export TERM=xterm-256color`
+```
 
 ### Clone repository
 `$ git clone https://github.com/jwhisnant/dotvim.git.vim ~.vim`
@@ -22,7 +24,9 @@ Do this in the settings for your shell.  (.bashrc, for example)
 
 Detailed instructions are here:
 But briefly 
-`$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+```sh
+$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
 
 ### You may need compile You Complete ME
 See [YCM] for complete instructions.  The compilation for C languages seems to be not worth the source compiling to me at this point.
