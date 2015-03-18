@@ -18,14 +18,25 @@ export TERM=xterm-256color`
 ```
 
 ### Clone repository
-`$ git clone https://github.com/jwhisnant/dotvim.git.vim ~.vim`
 
-### Install Vundle [Vundle]
+```sh
+$ git clone https://github.com/jwhisnant/dotvim.git $HOME/.vim
+```
 
-Detailed instructions are here:
-But briefly 
+### Install [Vundle]
 ```sh
 $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
+### Symlink to .vimrc
+```sh
+ln -s $HOME/.vim/vimrc  .vimrc
+```
+
+### Install Plugins
+```sh
+$ vi
+:PluginInstall
 ```
 
 ### You may need compile You Complete ME

@@ -20,9 +20,12 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'rking/ag.vim'
 Plugin 'mtth/scratch.vim'
 Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'yssl/QFEnter'
+
 
 " vcs
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter' " < signify
+Plugin 'mhinz/vim-signify'
 Plugin 'git://repo.or.cz/vcscommand'
 Plugin 'tpope/vim-fugitive'
 
@@ -39,6 +42,10 @@ Plugin 'bling/vim-airline'
 Plugin 'ryanoasis/vim-webdevicons'
 
 "lint and syntax highlighting
+"these break django snippets ...
+"Plugin 'mitsuhiko/vim-jinja'
+"Plugin 'lepture/vim-jinja'
+"au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
 Plugin 'scrooloose/syntastic'
 
 Plugin 'klen/python-mode' "disable autopep8 it not work so well
@@ -54,7 +61,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'chrisgillis/vim-bootstrap3-snippets'
 
-"Github integration
+"Github and Gist integration
 Plugin 'mattn/webapi-vim'
 Plugin 'jaxbot/github-issues.vim'
 Plugin 'vim-scripts/Gist.vim'
@@ -106,8 +113,12 @@ set ttyfast
 
 "Syntastic
 "let g:syntastic_ignore_files = ['\.py$'] "pymode instead
-let g:syntastic_python_flake8_args='--ignore=E501,702' "ignore long lines and one-liners
+let g:syntastic_python_pep8_args='--ignore=E501' "ignore long lines and one-liners
+let g:syntastic_python_flake8_args='--ignore=E501' "ignore long lines and one-liners
+let g:syntastic_python_checker_args='--ignore=E501'
 let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
+
+let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy5'
 
 "Flake8 is a wrapper around these tools: PyFlakes,  pep8, Ned Batchelder’s McCabe script
 "Available checkers: flake8 pep8 pyflakes pylint python
@@ -161,7 +172,7 @@ noremap <F1> :MBEToggle<CR>
 noremap <F2> :NERDTreeToggle<CR>
 nmap <F3> :TagbarToggle<CR>
 noremap <F5> :GundoToggle<CR> 
-"noremap <F7> :PymodeLint<CR>  " we will let syntastic do this instead on file write
+noremap <F7> :SyntasticCheck<CR>
 "noremap <F8> :PymodeLintAuto<CR>  "autopep8 maps here by default ...
 
 "F12 is mapped to MouseToggle
@@ -248,7 +259,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
 " For full syntax highlighting:
-"let python_highlight_all=1
+let python_highlight_all=1
 "syntax on
 
 "let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
@@ -300,8 +311,9 @@ au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabsto
 "E702 - one liner with semicolons
 "Do not fix these errors/warnings (default: E226,E24,W6)
 let g:autopep8_max_line_length=120 "E501
-let g:autopep8_ignore="E226,E24,W6,E702" 
-"let g:autopep8_disable_show_diff=1 "Disable show diff window
+let g:autopep8_ignore="E226,E24,W6,E702,E501" 
+let g:autopep8_disable_show_diff=0 "Disable show diff window
+
 "let g:syntastic_debug = 32
 
 " Pymode
