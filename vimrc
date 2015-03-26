@@ -22,9 +22,10 @@ Plugin 'mtth/scratch.vim'
 Plugin 'jmcantrell/vim-virtualenv'
 
 " vcs
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter' " use signify
 Plugin 'git://repo.or.cz/vcscommand'
 Plugin 'tpope/vim-fugitive'
+Plugin 'mhinz/vim-signify'
 
 " navigate
 Plugin 'kien/ctrlp.vim'
@@ -301,7 +302,7 @@ au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabsto
 "Do not fix these errors/warnings (default: E226,E24,W6)
 let g:autopep8_max_line_length=120 "E501
 let g:autopep8_ignore="E226,E24,W6,E702" 
-"let g:autopep8_disable_show_diff=1 "Disable show diff window
+let g:autopep8_disable_show_diff=1 "Disable show diff window
 "let g:syntastic_debug = 32
 
 " Pymode
