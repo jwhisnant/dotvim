@@ -22,9 +22,10 @@ Plugin 'mtth/scratch.vim'
 Plugin 'jmcantrell/vim-virtualenv'
 
 " vcs
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter' " use signify
 Plugin 'git://repo.or.cz/vcscommand'
 Plugin 'tpope/vim-fugitive'
+Plugin 'mhinz/vim-signify'
 
 " navigate
 Plugin 'kien/ctrlp.vim'
@@ -104,16 +105,31 @@ set ttyfast
  " Becomming root to save a document, just type `w!!`
  cmap w!! %!sudo tee > /dev/null %
 
+set colorcolumn=120
+let g:pep8_ignore="E501,W601"
+
 "Syntastic
 "let g:syntastic_ignore_files = ['\.py$'] "pymode instead
-let g:syntastic_python_flake8_args='--ignore=E501,702' "ignore long lines and one-liners
+"let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
+"let g:syntastic_debug = 1
+"et g:pep8_ignore="E501,W601"
+let g:syntastic_python_checkers = ['python', 'flake8', 'pep8']
+
+let g:syntastic_python_flake8_args='--ignore=E702,E501' "ignore long lines and one-liners
+let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=702' "ignore one-liners and length=120
+
 let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
+
+"let g:syntastic_python_pyflakes_max_line_length=120
+let g:syntastic_python_pep8_max_line_length=120
+
+"let g:syntastic_python_pylint_post_args="--max-line-length=120"
+
 
 "Flake8 is a wrapper around these tools: PyFlakes,  pep8, Ned Batchelder’s McCabe script
 "Available checkers: flake8 pep8 pyflakes pylint python
 "Currently enabled checkers: python flake8 pylint
 "I dont think I want mccabe
-let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
 "let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
 
 
@@ -301,7 +317,7 @@ au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabsto
 "Do not fix these errors/warnings (default: E226,E24,W6)
 let g:autopep8_max_line_length=120 "E501
 let g:autopep8_ignore="E226,E24,W6,E702" 
-"let g:autopep8_disable_show_diff=1 "Disable show diff window
+let g:autopep8_disable_show_diff=1 "Disable show diff window
 "let g:syntastic_debug = 32
 
 " Pymode
