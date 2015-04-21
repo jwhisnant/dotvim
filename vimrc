@@ -85,9 +85,7 @@ Plugin 'nvie/vim-togglemouse'
 "Plugin 'jeffkreeftmeijer/vim-numbertoggle' " Relative numbers in normal mode
 
 "YouCompleteMe unavailable: requires Vim 7.3.584+
-if v:version > '704' 
-    Plugin 'Valloric/YouCompleteMe'
-endif
+Plugin 'Valloric/YouCompleteMe'
 
 " vim-javascript fix for old vims
  "if v:version < '704' 
@@ -450,40 +448,6 @@ endif
 "let g:ycm_min_num_of_chars_for_completion = 2
 
 
-" if not YCM dont map keys
-"if v:version < '704' || !has('python')
-    "function! g:UltiSnips_Complete()
-        ""call UltiSnips_ExpandSnippet() "Deprecated UltiSnips_ExpandSnippet called. Please use UltiSnips#ExpandSnippet
-        "call UltiSnips#ExpandSnippet()
-
-        "if g:ulti_expand_res == 0
-            "if pumvisible()
-                "return "\<C-n>"
-            "else
-                ""Deprecated UltiSnips_JumpForwards called. Please use UltiSnips#JumpForwards.
-                ""call UltiSnips_JumpForwards()
-                "UltiSnips#JumpForwards()
-                "if g:ulti_jump_forwards_res == 0
-                "return "\<TAB>"
-                "endif
-            "endif
-        "endif
-        "return ""
-    "endfunction"
-    
-" we need this here because of have .vimrc is loaded to get the above to work
-"au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-"endif
-
-" should be if YCM, really
-"if v:version < '704' || !has('python')
-    "let g:UltiSnipsExpandTrigger="<c-j>"
-    "let g:UltiSnipsJumpForwardTrigger="<c-j>"
-    "let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-"endif
-
-
 "YCM and Ultisnips
 "
 "https://vimeo.com/93364612
@@ -492,6 +456,35 @@ endif
 "snippet for expanding, it checks for completion window and if it's
 "shown, selects first element. If there's no completion window it tries to
 "jump to next placeholder. If there's no placeholder it just returns TAB key 
+
+set foldlevel=99 "folding and YCM and Ultisnips dont seem to play well together
+" if not YCM dont map keys
+function! g:UltiSnips_Complete()
+    "call UltiSnips_ExpandSnippet() "Deprecated UltiSnips_ExpandSnippet called. Please use UltiSnips#ExpandSnippet
+    call UltiSnips#ExpandSnippet()
+
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            "Deprecated UltiSnips_JumpForwards called. Please use UltiSnips#JumpForwards.
+            "call UltiSnips_JumpForwards()
+            UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+            return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction"
+
+" we need this here because of have .vimrc is loaded to get the above to work
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+" should be if YCM, really
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " does not work, hacked the original
 "let g:VCSCommandSplit='vertical'
