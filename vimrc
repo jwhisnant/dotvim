@@ -105,10 +105,17 @@ set ttyfast
  " Becomming root to save a document, just type `w!!`
  cmap w!! %!sudo tee > /dev/null %
 
+set colorcolumn=120
+
 "Syntastic
 "let g:syntastic_ignore_files = ['\.py$'] "pymode instead
-let g:syntastic_python_flake8_args='--ignore=E501,702' "ignore long lines and one-liners
+"let g:syntastic_python_flake8_args='--ignore=E501,702' "ignore long lines and one-liners
+let g:syntastic_python_flake8_args='--ignore702' "ignore long lines and one-liners
 let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
+
+let g:syntastic_python_pyflakes_max_line_length=120
+let g:syntastic_python_pylint_post_args="--max-line-length=120"
+
 
 "Flake8 is a wrapper around these tools: PyFlakes,  pep8, Ned Batchelder’s McCabe script
 "Available checkers: flake8 pep8 pyflakes pylint python

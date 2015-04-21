@@ -18,7 +18,7 @@ export TERM=xterm-256color`
 ```
 
 ### Clone repository
-`$ git clone https://github.com/jwhisnant/dotvim.git.vim ~.vim`
+`$ git clone https://github.com/jwhisnant/dotvim.git.vim $HOME/.vim`
 
 ### Install Vundle [Vundle]
 
@@ -37,7 +37,7 @@ ycm_client_support.[so|pyd|dll] and ycm_core.[so|pyd|dll] not detected; you need
 
 ### Compile (Ubuntu 14.04) (non C languages)
 
-#you may already have these installed
+#You may already have these installed.
 ```sh
 sudo apt-get install build-essential cmake
 sudo apt-get install python-dev
