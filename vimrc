@@ -106,22 +106,30 @@ set ttyfast
  cmap w!! %!sudo tee > /dev/null %
 
 set colorcolumn=120
+let g:pep8_ignore="E501,W601"
 
 "Syntastic
 "let g:syntastic_ignore_files = ['\.py$'] "pymode instead
-"let g:syntastic_python_flake8_args='--ignore=E501,702' "ignore long lines and one-liners
-let g:syntastic_python_flake8_args='--ignore702' "ignore long lines and one-liners
+"let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
+"let g:syntastic_debug = 1
+"et g:pep8_ignore="E501,W601"
+let g:syntastic_python_checkers = ['python', 'flake8', 'pep8']
+
+let g:syntastic_python_flake8_args='--ignore=E702,E501' "ignore long lines and one-liners
+let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=702' "ignore one-liners and length=120
+
 let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
 
-let g:syntastic_python_pyflakes_max_line_length=120
-let g:syntastic_python_pylint_post_args="--max-line-length=120"
+"let g:syntastic_python_pyflakes_max_line_length=120
+let g:syntastic_python_pep8_max_line_length=120
+
+"let g:syntastic_python_pylint_post_args="--max-line-length=120"
 
 
 "Flake8 is a wrapper around these tools: PyFlakes,  pep8, Ned Batchelder’s McCabe script
 "Available checkers: flake8 pep8 pyflakes pylint python
 "Currently enabled checkers: python flake8 pylint
 "I dont think I want mccabe
-let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
 "let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
 
 
