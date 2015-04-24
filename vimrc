@@ -73,6 +73,18 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'alfredodeza/pytest.vim'
 Plugin 'nvie/vim-togglemouse'
 
+" org mode
+"Plugin 'jceb/vim-orgmode'
+Plugin 'hsitz/VimOrganizer'
+Plugin 'chrisbra/NrrwRgn'
+Plugin 'vim-scripts/utl.vim'
+"Plugin 'vim-scripts/calendar.vim--Matsumoto'
+"Plugin 'itchyny/calendar.vim'
+Plugin 'mattn/calendar-vim'
+
+
+
+
 "maybe ...
 "Plugin 'marijnh/tern_for_vim.git' "js
 "Plugin 'ervandew/supertab'
@@ -93,17 +105,20 @@ endif
  call vundle#end()            " required
  filetype plugin indent on    " required
 
+" org mode
+"let g:org_command_for_emacsclient = emacsclient
+
 "marsupials
 set ttyfast
 
 " Persistent undo.
- set undofile
- set undodir=~/.vim/undo
- set undolevels=1000
- set undoreload=10000
+set undofile
+set undodir=~/.vim/undo
+set undolevels=1000
+set undoreload=10000
 
  " Becomming root to save a document, just type `w!!`
- cmap w!! %!sudo tee > /dev/null %
+cmap w!! %!sudo tee > /dev/null %
 
 set colorcolumn=120
 let g:pep8_ignore="E501,W601"
@@ -276,7 +291,9 @@ set expandtab
 set softtabstop=4
 set number
 
-"autocmd VimEnter * :ToggleMouse() "turn off mouse by default, does not work
+" Orgmode requirements
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au BufEnter *.org            call org#SetOrgFileType()
 
 "On file open and FileRead
 au BufRead,BufNewFile *.md set filetype=markdown "silly modular
@@ -316,7 +333,7 @@ au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabsto
 "E702 - one liner with semicolons
 "Do not fix these errors/warnings (default: E226,E24,W6)
 let g:autopep8_max_line_length=120 "E501
-let g:autopep8_ignore="E226,E24,W6,E702" 
+let g:autopep8_ignore="E702" 
 let g:autopep8_disable_show_diff=1 "Disable show diff window
 "let g:syntastic_debug = 32
 
