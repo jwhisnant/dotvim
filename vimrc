@@ -16,6 +16,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Wolfy87/vim-enmasse'
 Plugin 'farseer90718/vim-taskwarrior'
+Plugin 'samsonw/vim-task'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'rking/ag.vim'
 Plugin 'mtth/scratch.vim'
@@ -26,6 +27,8 @@ Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'git://repo.or.cz/vcscommand'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
+Plugin 'tpope/vim-surround'
+
 
 " navigate
 Plugin 'kien/ctrlp.vim'
@@ -120,8 +123,12 @@ set undoreload=10000
  " Becomming root to save a document, just type `w!!`
 cmap w!! %!sudo tee > /dev/null %
 
+" fix E265 complaints
+"let g:NERDSpaceDelims = 1
+
+
 set colorcolumn=120
-let g:pep8_ignore="E501,W601"
+let g:pep8_ignore="E501,W601,E265"
 
 "Syntastic
 "let g:syntastic_ignore_files = ['\.py$'] "pymode instead
@@ -130,8 +137,8 @@ let g:pep8_ignore="E501,W601"
 "et g:pep8_ignore="E501,W601"
 let g:syntastic_python_checkers = ['python', 'flake8', 'pep8']
 
-let g:syntastic_python_flake8_args='--ignore=E702,E501' "ignore long lines and one-liners
-let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=702' "ignore one-liners and length=120
+let g:syntastic_python_flake8_args='--ignore=E702,E501,E265' "ignore long lines and one-liners
+let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=E702,E265' "ignore one-liners and length=120
 
 let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
 
@@ -292,42 +299,36 @@ set softtabstop=4
 set number
 
 " Orgmode requirements
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-au BufEnter *.org            call org#SetOrgFileType()
+autocmd! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+autocmd BufEnter *.org            call org#SetOrgFileType()
 
 "On file open and FileRead
-au BufRead,BufNewFile *.md set filetype=markdown "silly modular
-au BufRead,BufNewFile *.python set filetype=python "python yu no highlight
-au BufNewFile,BufRead *.sql set filetype=sql
+autocmd BufRead,BufNewFile *.md set filetype=markdown "silly modular
+autocmd BufRead,BufNewFile *.python set filetype=python "python yu no highlight
+autocmd BufNewFile,BufRead *.sql set filetype=sql
 
 "python settings
-au BufRead,BufNewFile *.py,*pyw set tabstop=4 expandtab softtabstop=4
+autocmd BufRead,BufNewFile *.py,*pyw set tabstop=4 expandtab softtabstop=4
 
 " Dont expand tabs in C type files
-au BufRead,BufNewFile *.py,*.pyw set expandtab
-au BufRead,BufNewFile *.c,*.h Makefile* set noexpandtab
+autocmd BufRead,BufNewFile *.py,*.pyw set expandtab
+autocmd BufRead,BufNewFile *.c,*.h Makefile* set noexpandtab
 
 " Highlight spaces and tabs as bad in python files
 highlight BadWhitespace ctermbg=red guibg=red
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/ "tabs bad beginning python lines
+autocmd BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/ "tabs bad beginning python lines
 
-" http://vim.wikia.com/wiki/How_to_not_move_cursor_when_selecting_window_with_mouse
-"augroup NO_CURSOR_MOVE_ON_FOCUS
-"au!
-"au FocusLost * let g:oldmouse=&mouse | set mouse=
-    "au FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
-"augroup END
-
-au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix " unix line ends
+autocmd BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix " unix line ends
 set encoding=utf-8 " utf-8
 
 "Odd filetypes
 "set up us the mapping of file types ..
-au BufRead,BufNewFile *.zcml :set ft=xml 
-au BufRead,BufNewFile *.kss :set ft=css
+autocmd BufRead,BufNewFile *.zcml :set ft=xml 
+autocmd BufRead,BufNewFile *.kss :set ft=css
+autocmd BufNewFile,BufRead todo.txt,*.task,*.tasks setfiletype task
 
 "" Number for the xml and zcml and pt files - seems to be 2 ...
-au BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 "autopep8
 "E702 - one liner with semicolons
