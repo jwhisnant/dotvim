@@ -29,7 +29,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
 Plugin 'tpope/vim-surround'
 
-
 " navigate
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree.git'
@@ -77,13 +76,16 @@ Plugin 'alfredodeza/pytest.vim'
 Plugin 'nvie/vim-togglemouse'
 
 " org mode
-"Plugin 'jceb/vim-orgmode'
-Plugin 'hsitz/VimOrganizer'
-Plugin 'chrisbra/NrrwRgn'
+Plugin 'jceb/vim-orgmode' " python based
 Plugin 'vim-scripts/utl.vim'
-"Plugin 'vim-scripts/calendar.vim--Matsumoto'
+Plugin 'vim-scripts/calendar.vim--Matsumoto'
+Plugin 'chrisbra/NrrwRgn'
+Plugin 'tpope/vim-speeddating'
+
+
+"Plugin 'hsitz/VimOrganizer' "emacs server meh
 "Plugin 'itchyny/calendar.vim'
-Plugin 'mattn/calendar-vim'
+"Plugin 'mattn/calendar-vim'
 
 
 
@@ -299,8 +301,8 @@ set softtabstop=4
 set number
 
 " Orgmode requirements
-autocmd! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-autocmd BufEnter *.org            call org#SetOrgFileType()
+"autocmd! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+"autocmd BufEnter *.org            call org#SetOrgFileType()
 
 "On file open and FileRead
 autocmd BufRead,BufNewFile *.md set filetype=markdown "silly modular
