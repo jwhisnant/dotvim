@@ -125,7 +125,7 @@ set undoreload=10000
  " Becomming root to save a document, just type `w!!`
 cmap w!! %!sudo tee > /dev/null %
 
-" fix E265 complaints
+" fix E265 complaints # but this breaks 4 space indents
 "let g:NERDSpaceDelims = 1
 
 
