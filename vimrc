@@ -11,6 +11,9 @@ filetype off                   " required!
 " setup
 Plugin 'gmarik/Vundle.vim'
 
+"shell
+Plugin 'vim-scripts/Conque-Shell.git'
+
 "utility
 Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -21,7 +24,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'rking/ag.vim'
 Plugin 'mtth/scratch.vim'
 Plugin 'jmcantrell/vim-virtualenv'
-
+"
 " vcs
 "Plugin 'airblade/vim-gitgutter' " use signify
 Plugin 'git://repo.or.cz/vcscommand'
@@ -44,7 +47,7 @@ Plugin 'ryanoasis/vim-webdevicons'
 "lint and syntax highlighting
 Plugin 'scrooloose/syntastic'
 
-Plugin 'klen/python-mode' "disable autopep8 it not work so well
+Plugin 'klen/python-mode' "we keep this mostly for breakpoint adding quickly
 Plugin 'tell-k/vim-autopep8'
 
 Plugin 'plasticboy/vim-markdown'
@@ -129,7 +132,7 @@ cmap w!! %!sudo tee > /dev/null %
 "let g:NERDSpaceDelims = 1
 
 
-set colorcolumn=120
+set colorcolumn=
 let g:pep8_ignore="E501,W601,E265"
 
 "Syntastic
@@ -164,10 +167,16 @@ syntax on
 "CUSTOM USER SETTINGS
 "Ultisnip contact info
 call custom#contact()
+" sql setup
 call custom#sqlsetup()
+
+" env for sql
+call custom#env()
 
 "http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings
 call custom#numpad()
+
+
 
 "let g:snips_author=''
 "let g:author=''
@@ -178,7 +187,7 @@ call custom#numpad()
 
 "
 "256 colors http://robotsrule.us/vim/
-set t_Co=256
+"set t_Co=256
 
 if has("autocmd")
   filetype plugin indent on
@@ -212,7 +221,8 @@ noremap <F5> :GundoToggle<CR>
 
 "colors
 set background=dark
-color sorcerer
+color desert256v2
+"color sorcerer
 "color jellybeans
 "color mango
 "color ingretu
@@ -335,13 +345,17 @@ autocmd BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible t
 "autopep8
 "E702 - one liner with semicolons
 "Do not fix these errors/warnings (default: E226,E24,W6)
+"https://github.com/tell-k/vim-autopep8
+
 let g:autopep8_max_line_length=120 "E501
 let g:autopep8_ignore="E702" 
 let g:autopep8_disable_show_diff=1 "Disable show diff window
+let g:autopep8_pep8_passes=10
 "let g:syntastic_debug = 32
 
 " Pymode
 let g:pymode_lint = 0 "Turn off code checking
+let g:pymode_options_colorcolumn = 0
 
 " DIAF rope
 " Complete keywords from not imported modules (could make completion slower)
@@ -525,4 +539,17 @@ endif
 "    endif
 "augroup END
 
-"
+"http://www.sontek.net/blog/2011/05/07/turning_vim_into_a_modern_python_ide.html
+
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
+
+" Execute the tests
+ nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+ nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+ nmap <silent><Leader>tm <Esc>:Pytest method<CR>
+ " cycle through test errors
+ nmap <silent><Leader>tn <Esc>:Pytest next<CR>
+ nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
+ nmap <silent><Leader>te <Esc>:Pytest error<CR>
