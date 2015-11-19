@@ -46,6 +46,7 @@ Plugin 'ryanoasis/vim-webdevicons'
 
 "lint and syntax highlighting
 Plugin 'scrooloose/syntastic'
+Plugin 'mitsuhiko/vim-jinja'
 
 Plugin 'klen/python-mode' "we keep this mostly for breakpoint adding quickly
 Plugin 'tell-k/vim-autopep8'
@@ -133,18 +134,20 @@ cmap w!! %!sudo tee > /dev/null %
 
 
 set colorcolumn=
-let g:pep8_ignore="E501,W601,E265"
+let g:pep8_ignore="E501,W601,E265, E261"
 
 "Syntastic
 "let g:syntastic_ignore_files = ['\.py$'] "pymode instead
 "let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
 "let g:syntastic_debug = 1
 "et g:pep8_ignore="E501,W601"
+"
 let g:syntastic_python_checkers = ['python', 'flake8', 'pep8']
 
-let g:syntastic_python_flake8_args='--ignore=E702,E501,E265' "ignore long lines and one-liners
-let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=E702,E265' "ignore one-liners and length=120
+let g:syntastic_python_flake8_args='--ignore=E702,E501,E265,E116,E261,E262,E261' "ignore long lines and one-liners
+let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=E702,E265,E116,E261,E262,E261' "ignore one-liners and length=120
 
+"let g:syntastic_always_populate_loc_list = 0 
 let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
 
 "let g:syntastic_python_pyflakes_max_line_length=120
@@ -211,8 +214,15 @@ noremap <F2> :NERDTreeToggle<CR>
 nmap <F3> :TagbarToggle<CR>
 noremap <F5> :GundoToggle<CR> 
 "noremap <F7> :PymodeLint<CR>  " we will let syntastic do this instead on file write
-"noremap <F8> :PymodeLintAuto<CR>  "autopep8 maps here by default ...
+"
+autocmd FileType python map <buffer> <F11> :call Autopep8()<CR>
+"https://github.com/tell-k/vim-autopep8 map to a key we dont want to use ...
 
+noremap <F8> zR<CR> :call Autopep8()<CR>
+"open folds first so that it does not zot blank lines
+
+"
+"
 "F12 is mapped to MouseToggle
 
 "normal keys - this might mess up quickfix
@@ -294,6 +304,9 @@ let g:UltiSnipsExpandTrigger="<tab>" "YCM uses tab
 let g:UltiSnipsJumpForwardTrigger="<tab>" "YCM uses tab
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+"docstrings
+let g:ultisnips_python_style='numpy'
+
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
@@ -302,6 +315,7 @@ let g:UltiSnipsEditSplit="vertical"
 "syntax on
 
 "let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()'
 
 set visualbell t_vb=
 set backspace=2 " make backspace work like most other apps
@@ -348,7 +362,7 @@ autocmd BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible t
 "https://github.com/tell-k/vim-autopep8
 
 let g:autopep8_max_line_length=120 "E501
-let g:autopep8_ignore="E702" 
+let g:autopep8_ignore="E24,W6,E702,E26,E265,E116"  "longlines and comments
 let g:autopep8_disable_show_diff=1 "Disable show diff window
 let g:autopep8_pep8_passes=10
 "let g:syntastic_debug = 32
