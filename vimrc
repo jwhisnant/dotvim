@@ -95,7 +95,7 @@ Plugin 'wikitopian/hardmode'
 Plugin 'godlygeek/tabular'
 Plugin 'weierophinney/argumentrewrap'
 
-source $HOME/php.vim
+source $HOME/.vim/php.vim
 
 "maybe ...
 "Plugin 'marijnh/tern_for_vim.git' "js
