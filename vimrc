@@ -143,7 +143,7 @@ cmap w!! %!sudo tee > /dev/null %
 "let g:pep8_ignore="E501,W601,E265"
 set showcmd 
 
-set colorcolumn=120
+set colorcolumn=
 let g:pep8_ignore="E501,W601,E265"
 
 "Syntastic
