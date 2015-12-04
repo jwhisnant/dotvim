@@ -11,6 +11,9 @@ filetype off                   " required!
 " setup
 Plugin 'gmarik/Vundle.vim'
 
+"shell
+Plugin 'vim-scripts/Conque-Shell.git'
+
 "utility
 Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -21,7 +24,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'rking/ag.vim'
 Plugin 'mtth/scratch.vim'
 Plugin 'jmcantrell/vim-virtualenv'
-
+"
 " vcs
 "Plugin 'airblade/vim-gitgutter' " use signify
 Plugin 'git://repo.or.cz/vcscommand'
@@ -43,8 +46,9 @@ Plugin 'ryanoasis/vim-webdevicons'
 
 "lint and syntax highlighting
 Plugin 'scrooloose/syntastic'
+Plugin 'mitsuhiko/vim-jinja'
 
-Plugin 'klen/python-mode' "disable autopep8 it not work so well
+Plugin 'klen/python-mode' "we keep this mostly for breakpoint adding quickly
 Plugin 'tell-k/vim-autopep8'
 
 Plugin 'plasticboy/vim-markdown'
@@ -69,7 +73,7 @@ Plugin 'vim-scripts/SQLComplete.vim' "doesnt seem to work
 
 " tmux 14.04
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'kikijump/tslime.vim'
+"Plugin 'kikijump/tslime.vim'
 Plugin 'edkolev/tmuxline.vim'
 
 Plugin 'alfredodeza/pytest.vim'
@@ -91,7 +95,7 @@ Plugin 'wikitopian/hardmode'
 Plugin 'godlygeek/tabular'
 Plugin 'weierophinney/argumentrewrap'
 
-source $HOME/php.vim
+source $HOME/.vim/php.vim
 
 "maybe ...
 "Plugin 'marijnh/tern_for_vim.git' "js
@@ -128,13 +132,18 @@ set undoreload=10000
  " Becomming root to save a document, just type `w!!`
 cmap w!! %!sudo tee > /dev/null %
 
-" fix E265 complaints
+" fix E265 complaints # but this breaks 4 space indents
 "let g:NERDSpaceDelims = 1
 
 
+"set colorcolumn=
+"let g:pep8_ignore="E501,W601,E265, E261"
+"||||||| merged common ancestors
+"set colorcolumn=120
+"let g:pep8_ignore="E501,W601,E265"
 set showcmd 
 
-set colorcolumn=120
+set colorcolumn=
 let g:pep8_ignore="E501,W601,E265"
 
 "Syntastic
@@ -142,11 +151,13 @@ let g:pep8_ignore="E501,W601,E265"
 "let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
 "let g:syntastic_debug = 1
 "et g:pep8_ignore="E501,W601"
+"
 let g:syntastic_python_checkers = ['python', 'flake8', 'pep8']
 
-let g:syntastic_python_flake8_args='--ignore=E702,E501,E265' "ignore long lines and one-liners
-let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=E702,E265' "ignore one-liners and length=120
+let g:syntastic_python_flake8_args='--ignore=E702,E501,E265,E116,E261,E262,E261' "ignore long lines and one-liners
+let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=E702,E265,E116,E261,E262,E261' "ignore one-liners and length=120
 
+"let g:syntastic_always_populate_loc_list = 0 
 let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
 
 "let g:syntastic_python_pyflakes_max_line_length=120
@@ -169,10 +180,16 @@ syntax on
 "CUSTOM USER SETTINGS
 "Ultisnip contact info
 call custom#contact()
+" sql setup
 call custom#sqlsetup()
+
+" env for sql
+call custom#env()
 
 "http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings
 call custom#numpad()
+
+
 
 "let g:snips_author=''
 "let g:author=''
@@ -183,7 +200,7 @@ call custom#numpad()
 
 "
 "256 colors http://robotsrule.us/vim/
-set t_Co=256
+"set t_Co=256
 
 if has("autocmd")
   filetype plugin indent on
@@ -207,8 +224,15 @@ noremap <F2> :NERDTreeToggle<CR>
 nmap <F3> :TagbarToggle<CR>
 noremap <F5> :GundoToggle<CR> 
 "noremap <F7> :PymodeLint<CR>  " we will let syntastic do this instead on file write
-"noremap <F8> :PymodeLintAuto<CR>  "autopep8 maps here by default ...
+"
+autocmd FileType python map <buffer> <F11> :call Autopep8()<CR>
+"https://github.com/tell-k/vim-autopep8 map to a key we dont want to use ...
 
+noremap <F8> zR<CR> :call Autopep8()<CR>
+"open folds first so that it does not zot blank lines
+
+"
+"
 "F12 is mapped to MouseToggle
 
 "normal keys - this might mess up quickfix
@@ -217,7 +241,8 @@ noremap <F5> :GundoToggle<CR>
 
 "colors
 set background=dark
-color sorcerer
+color desert256v2
+"color sorcerer
 "color jellybeans
 "color mango
 "color ingretu
@@ -289,6 +314,9 @@ let g:UltiSnipsExpandTrigger="<tab>" "YCM uses tab
 let g:UltiSnipsJumpForwardTrigger="<tab>" "YCM uses tab
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+"docstrings
+let g:ultisnips_python_style='numpy'
+
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
@@ -297,6 +325,7 @@ let g:UltiSnipsEditSplit="vertical"
 "syntax on
 
 "let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()'
 
 set visualbell t_vb=
 set backspace=2 " make backspace work like most other apps
@@ -340,13 +369,17 @@ autocmd BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible t
 "autopep8
 "E702 - one liner with semicolons
 "Do not fix these errors/warnings (default: E226,E24,W6)
+"https://github.com/tell-k/vim-autopep8
+
 let g:autopep8_max_line_length=120 "E501
-let g:autopep8_ignore="E702" 
+let g:autopep8_ignore="E24,W6,E702,E26,E265,E116"  "longlines and comments
 let g:autopep8_disable_show_diff=1 "Disable show diff window
+let g:autopep8_pep8_passes=10
 "let g:syntastic_debug = 32
 
 " Pymode
 let g:pymode_lint = 0 "Turn off code checking
+let g:pymode_options_colorcolumn = 0
 
 " DIAF rope
 " Complete keywords from not imported modules (could make completion slower)
@@ -530,4 +563,17 @@ endif
 "    endif
 "augroup END
 
-"
+"http://www.sontek.net/blog/2011/05/07/turning_vim_into_a_modern_python_ide.html
+
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
+
+" Execute the tests
+ nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+ nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+ nmap <silent><Leader>tm <Esc>:Pytest method<CR>
+ " cycle through test errors
+ nmap <silent><Leader>tn <Esc>:Pytest next<CR>
+ nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
+ nmap <silent><Leader>te <Esc>:Pytest error<CR>
