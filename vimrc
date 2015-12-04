@@ -73,7 +73,7 @@ Plugin 'vim-scripts/SQLComplete.vim' "doesnt seem to work
 
 " tmux 14.04
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'kikijump/tslime.vim'
+"Plugin 'kikijump/tslime.vim'
 Plugin 'edkolev/tmuxline.vim'
 
 Plugin 'alfredodeza/pytest.vim'
