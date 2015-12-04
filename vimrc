@@ -82,13 +82,16 @@ Plugin 'vim-scripts/calendar.vim--Matsumoto'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'tpope/vim-speeddating'
 
-
+Plugin 'wikitopian/hardmode'
 "Plugin 'hsitz/VimOrganizer' "emacs server meh
 "Plugin 'itchyny/calendar.vim'
 "Plugin 'mattn/calendar-vim'
 
 
+Plugin 'godlygeek/tabular'
+Plugin 'weierophinney/argumentrewrap'
 
+source $HOME/php.vim
 
 "maybe ...
 "Plugin 'marijnh/tern_for_vim.git' "js
@@ -128,6 +131,8 @@ cmap w!! %!sudo tee > /dev/null %
 " fix E265 complaints
 "let g:NERDSpaceDelims = 1
 
+
+set showcmd 
 
 set colorcolumn=120
 let g:pep8_ignore="E501,W601,E265"
