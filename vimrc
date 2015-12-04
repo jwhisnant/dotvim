@@ -86,13 +86,16 @@ Plugin 'vim-scripts/calendar.vim--Matsumoto'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'tpope/vim-speeddating'
 
-
+Plugin 'wikitopian/hardmode'
 "Plugin 'hsitz/VimOrganizer' "emacs server meh
 "Plugin 'itchyny/calendar.vim'
 "Plugin 'mattn/calendar-vim'
 
 
+Plugin 'godlygeek/tabular'
+Plugin 'weierophinney/argumentrewrap'
 
+source $HOME/php.vim
 
 "maybe ...
 "Plugin 'marijnh/tern_for_vim.git' "js
@@ -133,8 +136,15 @@ cmap w!! %!sudo tee > /dev/null %
 "let g:NERDSpaceDelims = 1
 
 
-set colorcolumn=
-let g:pep8_ignore="E501,W601,E265, E261"
+"set colorcolumn=
+"let g:pep8_ignore="E501,W601,E265, E261"
+"||||||| merged common ancestors
+"set colorcolumn=120
+"let g:pep8_ignore="E501,W601,E265"
+set showcmd 
+
+set colorcolumn=120
+let g:pep8_ignore="E501,W601,E265"
 
 "Syntastic
 "let g:syntastic_ignore_files = ['\.py$'] "pymode instead
