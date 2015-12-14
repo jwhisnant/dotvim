@@ -14,13 +14,14 @@ This can make a big difference on what a particular color scheme looks like.
 Do this in the settings for your shell.  (.bashrc, for example)
 
 ```sh
-export TERM=xterm-256color`
+export TERM=xterm-256color
+# or export TERM=screen-256color
 ```
 
 ### Clone repository
-`$ git clone https://github.com/jwhisnant/dotvim.git.vim $HOME/.vim`
+`$ git clone https://github.com/jwhisnant/dotvim.git $HOME/.vim`
 
-### Install Vundle [Vundle]
+### Install [Vundle]
 
 Detailed instructions are here:
 But briefly 
@@ -28,7 +29,27 @@ But briefly
 $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
-### You may need compile You Complete ME
+### Create a symlink to .vimrc
+```sh
+cd $HOME
+ln -s .vim/vimrc .vimrc
+```
+
+### Install linters and other python tools for your OS
+
+These instructions are written for Ubuntu, your mileage may vary.
+
+```sh
+$ sudo apt-get install pip virtualenv virtualenvwrapper
+$ sudo apt-get install pylint pep8
+```
+
+### Create a custom.vim and put it in autoload
+
+Either create a custom.vim file and put it in .vim/autoload
+directory or comment them from this .vimrc.
+
+### (Optional) You may need (or want) compile You Complete ME
 See [YCM] for complete instructions.  The compilation for C languages seems to be not worth the source compiling to me at this point.
 
 ```sh
@@ -45,20 +66,6 @@ sudo apt-get install python-dev
 #install without C support
 `$ cd $HOME/.vim/bundle/YouCompleteMe ; ./install.sh`
 
-### Create symlink to .vimrc
-```sh
-cd $HOME
-ln -s .vim/vimrc .vimrc
-```
-
-### Install linters and other python tools for your OS
-
-These instructions are written for Ubuntu, your mileage may vary.
-
-```sh
-$ sudo apt-get install pip virtualenv virtualenvwrapper
-$ sudo apt-get install pylint pep8
-```
 
 [Vundle]:http://github.com/gmarik/Vundle.vim
 [YCM]:https://github.com/Valloric/YouCompleteMe
