@@ -153,6 +153,7 @@ source $HOME/.vim/settings.vim
 source $HOME/.vim/functions.vim
 :call LoadDefaultMappings()
 
+
 "set SQL DBext defaults
 :let  g:dbext_default_history_size = 4096
 

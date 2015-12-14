@@ -11,7 +11,13 @@ vnoremap <F1> <nop>
 nnoremap <space> za
 vnoremap <space> zf
 
+"defaults for all mappings
 noremap <F1> :MBEToggle<CR> 
+nnoremap <silent> <Leader>t :TagbarToggle<CR>
+noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
+noremap <silent> <Leader><tab> :MBEbb<CR>
+nnoremap <silent> <Leader>s :call argumentrewrap#RewrapArguments()<CR>
+
 
 function! LoadDefaultMappings()
     silent !echo 'Setting Default Mappings'
