@@ -44,7 +44,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'bling/vim-airline'
 "Plugin 'itchyny/lightline.vim'
 Plugin 'ryanoasis/vim-webdevicons'
-Plugin 'myusuf3/numbers.vim'
+"Plugin 'myusuf3/numbers.vim'
 
 "lint and syntax highlighting
 Plugin 'scrooloose/syntastic'

@@ -151,8 +151,7 @@ source $HOME/.vim/settings.vim
 
 "load functions
 source $HOME/.vim/functions.vim
-
-
+:call LoadDefaultMappings()
 
 "set SQL DBext defaults
 :let  g:dbext_default_history_size = 4096
@@ -292,6 +291,11 @@ endif
 "http://www.sontek.net/blog/2011/05/07/turning_vim_into_a_modern_python_ide.html
 
 au FileType python set omnifunc=pythoncomplete#Complete
+
+
+" PHP
+autocmd FileType php :call LoadPhpMappings()
+
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 

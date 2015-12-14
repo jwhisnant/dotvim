@@ -12,27 +12,45 @@ nnoremap <space> za
 vnoremap <space> zf
 
 noremap <F1> :MBEToggle<CR> 
-noremap <F2> :NERDTreeToggle<CR>
 
-nnoremap <F3> :NumbersToggle<CR>
-"nnoremap <F4> :NumbersOnOff<CR>
+function! LoadDefaultMappings()
+    silent !echo 'Setting Default Mappings'
+    noremap <F2> :NERDTreeToggle<CR>
+    nnoremap <F3> :NumbersToggle<CR>
+    "nnoremap <F4> :NumbersOnOff<CR>
+    " show classes
+    "nmap <F4> :TagbarToggle<CR> 
+    noremap <F5> :GundoToggle<CR> 
+   " autocmd FileType python 
+    map <buffer> <F11> :call Autopep8()<CR>
+    "fix to expand folds or autopep8 does the wrong thing
+    noremap <F8> zR<CR> :call Autopep8()<CR>
+    " vim mouse F12
+    nnoremap <silent> <Leader>t :TagbarToggle<CR>
+endfunction
 
-" show classes
 
-"nmap <F4> :TagbarToggle<CR> 
-noremap <F5> :GundoToggle<CR> 
+function! ClearDefaultMappings()
+    silent !echo 'Cleared Default Mappings'
+    noremap <F2> <nop>
+    noremap <F3> <nop>
+    noremap <F5> <nop>
+    noremap <F8> <nop>
+    noremap <F11> <nop>
+    noremap <F12> <nop>
+endfunction
+
+function! LoadPhpMappings()
+    silent !echo 'Setting PHP X-debug Mappings'
+    call Vdebug_load_keymaps(g:vdebug_keymap)
+endfunction
 
 "vim mouse"
 "we have to edit that on our own ...
 
 "noremap <F7> :PymodeLint<CR>  " we will let syntastic do this instead on file write
-nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
 "https://github.com/tell-k/vim-autopep8 map to a key we dont want to use ...
-autocmd FileType python map <buffer> <F12> :call Autopep8()<CR>
-
-"fix to expand folds or autopep8 does the wrong thing
-noremap <F8> zR<CR> :call Autopep8()<CR>
 
 " Orgmode requirements
 "autocmd! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
@@ -62,7 +80,6 @@ autocmd BufRead,BufNewFile *.zcml :set ft=xml
 autocmd BufRead,BufNewFile *.kss :set ft=css
 autocmd BufNewFile,BufRead todo.txt,*.task,*.tasks setfiletype task
 
-"" Number for the xml and zcml and pt files - seems to be 2 ...
+" Number for the xml and zcml and pt files - seems to be 2 ...
 autocmd BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-
 
