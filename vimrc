@@ -171,8 +171,10 @@ source $HOME/.vim/functions.vim
 
 
 " Minibufexplorer
-noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
+"noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
 noremap <silent> <Leader><tab> :MBEbb<CR>
+
+noremap <silent> <Leader>b iimport ipdb ; ipdb.set_trace()  #XXX BREAKPOINT<CR><esc> 
 
 let g:miniBufExplorerAutoStart = 0          " Open MBE manually when needed.
 let g:miniBufExplTabWrap = 1                " Don't break a minibuf tab across lines
@@ -295,7 +297,7 @@ au FileType python set omnifunc=pythoncomplete#Complete
 
 
 " PHP
-autocmd FileType php :call LoadPhpMappings()
+"autocmd FileType php :call LoadPhpMappings()
 
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview

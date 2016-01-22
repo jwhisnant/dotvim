@@ -51,6 +51,21 @@ function! LoadPhpMappings()
     call Vdebug_load_keymaps(g:vdebug_keymap)
 endfunction
 
+"let g:vdebug_keymap_defaults = {
+"\    'run' : '<F5>',
+"\    'run_to_cursor' : '<F9>',
+"\    'step_over' : '<F2>',
+"\    'step_into' : '<F3>',
+"\    'step_out' : '<F4>',
+"\    'close' : '<F6>',
+"\    'detach' : '<F7>',
+"\    'set_breakpoint' : '<F10>',
+"\    'get_context' : '<F11>',
+"\    'eval_under_cursor' : '<F12>',
+"\    'eval_visual' : '<Leader>e'
+"\}
+
+
 "vim mouse"
 "we have to edit that on our own ...
 
