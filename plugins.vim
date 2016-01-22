@@ -1,126 +1,129 @@
-"things to do first
+ "things to do first
 set nocompatible               " be iMproved
 filetype off                   " required!
 
 "switch to Vundle, now I get it ...
 " set the runtime path to include Vundle and initialize
- set rtp+=~/.vim/bundle/Vundle.vim
- call vundle#begin()
+ "set rtp+=~/.vim/bundle/Vundle.vim
+ "call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " This file will contain plugins only ...
 " let Vundle manage Vundle, required
 " setup
-Plugin 'gmarik/Vundle.vim'
+Plug 'gmarik/Vundle.vim'
+Plug 'flazz/vim-colorschemes'
 
 "shell
-Plugin 'vim-scripts/Conque-Shell.git'
+Plug 'vim-scripts/Conque-Shell'
 
 "utility
-Plugin 'sjl/gundo.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Wolfy87/vim-enmasse'
-"Plugin 'farseer90718/vim-taskwarrior'
-Plugin 'samsonw/vim-task'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'rking/ag.vim'
-Plugin 'mtth/scratch.vim'
-Plugin 'jmcantrell/vim-virtualenv'
+Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Wolfy87/vim-enmasse'
+"Plug 'farseer90718/vim-taskwarrior'
+Plug 'samsonw/vim-task'
+Plug 'tpope/vim-unimpaired'
+Plug 'rking/ag.vim'
+Plug 'mtth/scratch.vim'
+Plug 'jmcantrell/vim-virtualenv'
 "
 " vcs
-"Plugin 'airblade/vim-gitgutter' " use signify
-Plugin 'git://repo.or.cz/vcscommand'
-Plugin 'tpope/vim-fugitive'
-Plugin 'mhinz/vim-signify'
-Plugin 'tpope/vim-surround'
+"Plug 'airblade/vim-gitgutter' " use signify
+Plug 'git://repo.or.cz/vcscommand'
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-surround'
 
 " navigate
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'majutsushi/tagbar'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'majutsushi/tagbar'
 
 "look and feel
-Plugin 'flazz/vim-colorschemes'
-Plugin 'bling/vim-airline'
-"Plugin 'itchyny/lightline.vim'
-Plugin 'ryanoasis/vim-webdevicons'
-"Plugin 'myusuf3/numbers.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'bling/vim-airline'
+"Plug 'itchyny/lightline.vim'
+Plug 'ryanoasis/vim-webdevicons'
+"Plug 'myusuf3/numbers.vim'
 
 "lint and syntax highlighting
-Plugin 'scrooloose/syntastic'
-Plugin 'mitsuhiko/vim-jinja'
+Plug 'scrooloose/syntastic'
+Plug 'mitsuhiko/vim-jinja'
 
-Plugin 'klen/python-mode' "we keep this mostly for breakpoint adding quickly
-Plugin 'tell-k/vim-autopep8'
+"Plug 'klen/python-mode' "we keep this mostly for breakpoint adding quickly
+Plug 'davidhalter/jedi-vim'
+Plug 'tell-k/vim-autopep8'
 
-Plugin 'plasticboy/vim-markdown'
-Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'valloric/MatchTagAlways'
-Plugin 'pangloss/vim-javascript'
+Plug 'plasticboy/vim-markdown'
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'valloric/MatchTagAlways'
+Plug 'pangloss/vim-javascript'
 
 "ultisnips
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'chrisgillis/vim-bootstrap3-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'chrisgillis/vim-bootstrap3-snippets'
 
 "Github integration
-Plugin 'mattn/webapi-vim'
-Plugin 'jaxbot/github-issues.vim'
-Plugin 'vim-scripts/Gist.vim'
+Plug 'mattn/webapi-vim'
+Plug 'jaxbot/github-issues.vim'
+Plug 'vim-scripts/Gist.vim'
 
 "mysql
-Plugin 'krisajenkins/vim-pipe'
-Plugin 'vim-scripts/dbext.vim'
-Plugin 'vim-scripts/SQLComplete.vim' "doesnt seem to work
+Plug 'krisajenkins/vim-pipe'
+Plug 'vim-scripts/dbext.vim'
+Plug 'vim-scripts/SQLComplete.vim' "doesnt seem to work
 
 " tmux 14.04
-Plugin 'christoomey/vim-tmux-navigator'
-"Plugin 'kikijump/tslime.vim'
-Plugin 'edkolev/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
+"Plug 'kikijump/tslime.vim'
+Plug 'edkolev/tmuxline.vim'
 
-Plugin 'alfredodeza/pytest.vim'
-Plugin 'nvie/vim-togglemouse'
+Plug 'alfredodeza/pytest.vim'
+Plug 'nvie/vim-togglemouse'
 
 " org
-Plugin 'jceb/vim-orgmode' " python based
-Plugin 'vim-scripts/utl.vim'
-Plugin 'vim-scripts/calendar.vim--Matsumoto'
-Plugin 'chrisbra/NrrwRgn'
-Plugin 'tpope/vim-speeddating'
+Plug 'jceb/vim-orgmode' " python based
+Plug 'vim-scripts/utl.vim'
+Plug 'vim-scripts/calendar.vim--Matsumoto'
+Plug 'chrisbra/NrrwRgn'
+Plug 'tpope/vim-speeddating'
 
-Plugin 'wikitopian/hardmode'
-"Plugin 'hsitz/VimOrganizer' "emacs server meh
-"Plugin 'itchyny/calendar.vim'
-"Plugin 'mattn/calendar-vim'
+Plug 'wikitopian/hardmode'
+"Plug 'hsitz/VimOrganizer' "emacs server meh
+"Plug 'itchyny/calendar.vim'
+"Plug 'mattn/calendar-vim'
 "
-Plugin 'godlygeek/tabular'
-Plugin 'weierophinney/argumentrewrap'
+Plug 'godlygeek/tabular'
+Plug 'weierophinney/argumentrewrap'
 
 "php
-"Plugin 'shawncplus/phpcomplete.vim'
+"Plug 'shawncplus/phpcomplete.vim'
 "https://github.com/mjacobus/.dotfiles/blob/master/vim/plugins.vim
 "
-Plugin 'StanAngeloff/php.vim'
-"Plugin 'squizlabs/PHP_CodeSniffer' "does not download wth
-Plugin 'phpmd/phpmd'
-Plugin 'joonty/vim-phpunitqf'
-Plugin 'joonty/vdebug'
-Plugin 'tobyS/pdv'
-Plugin 'othree/html5.vim'
+"
+Plug 'StanAngeloff/php.vim'
+"Plug 'squizlabs/PHP_CodeSniffer' "does not download wth
+Plug 'phpmd/phpmd'
+Plug 'joonty/vim-phpunitqf'
+"Plug 'joonty/vdebug'
+Plug 'tobyS/pdv'
+Plug 'othree/html5.vim'
 
-Plugin 'captbaritone/better-indent-support-for-php-with-html'
+Plug 'captbaritone/better-indent-support-for-php-with-html'
+
 "https://github.com/b4n/ctags/tree/better-php-parser
 
 "maybe ...
-"Plugin 'marijnh/tern_for_vim.git' "js
-"Plugin 'ervandew/supertab'
-"Plugin 'jeffkreeftmeijer/vim-numbertoggle' " Relative numbers in normal mode
+"Plug 'marijnh/tern_for_vim.git' "js
+"Plug 'ervandew/supertab'
+"Plug 'jeffkreeftmeijer/vim-numbertoggle' " Relative numbers in normal mode
 "
 
 
-
-
-" All of your Plugins must be added before the following line
- call vundle#end()            " required
- filetype plugin indent on    " required
+" All of your Plugs must be added before the following line
+call plug#end()
+filetype plugin indent on    " required
 

@@ -106,10 +106,10 @@ let g:miniBufExplBRSplit = 0                " Put window on left or upper
 let g:did_minibufexplorer_syntax_inits = 1  " Use my colors.
 let g:miniBufExplCycleArround = 1           " Cycle when doing buffer movement.
 "let g:miniBufExplShowBufNumbers = 0         " Don't show buffer numbers.
+
 " Minibufexplorer
 noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
 noremap <silent> <Leader><tab> :MBEbb<CR>
-
 
 
 "set SQL DBext defaults

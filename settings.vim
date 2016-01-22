@@ -1,3 +1,8 @@
+"jedi
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_enabled = 0
+let g:jedi#show_call_signatures = "0"
+
 "ctrlp
 "create a cache to optomize and use ag
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
@@ -13,8 +18,10 @@ endif
 let g:pep8_ignore="E501,W601,E265,E261"
 
 "Syntastic
-"
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+" disable, since we dont have an autoformatter
+let g:syntastic_disabled_filetypes= ['php',]
+"let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers = ['php',]
 
 "let g:syntastic_ignore_files = ['\.py$'] "pymode instead
 "let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
