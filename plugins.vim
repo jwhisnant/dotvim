@@ -18,6 +18,8 @@ Plug 'flazz/vim-colorschemes'
 Plug 'vim-scripts/Conque-Shell'
 
 "utility
+Plug 'godlygeek/tabular'
+Plug 'chrisbra/csv.vim'
 Plug 'sjl/gundo.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Wolfy87/vim-enmasse'

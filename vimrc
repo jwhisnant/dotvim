@@ -192,7 +192,7 @@ let g:miniBufExplCycleArround = 1           " Cycle when doing buffer movement.
 "nnoremap <right> :cnext<cr>zvzz
 
 "airline
-let g:airline_theme='simple'
+"let g:airline_theme='simple'
 "let g:airline_theme='raven'
 "let g:airline_theme='dark'
 "let g:airline_theme='ubaryd'
