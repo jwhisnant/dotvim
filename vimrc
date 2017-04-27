@@ -40,15 +40,15 @@ syntax on
 
 "CUSTOM USER SETTINGS
 "Ultisnip contact info
-call custom#contact()
-" sql setup
-call custom#sqlsetup()
+"call custom#contact()
+"" sql setup
+"call custom#sqlsetup()
 
-" env for sql
-call custom#env()
+"" env for sql
+"call custom#env()
 
 "http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings
-call custom#numpad()
+"call custom#numpad()
 
 
 
