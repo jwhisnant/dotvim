@@ -55,7 +55,7 @@ Plug 'scrooloose/syntastic'
 Plug 'mitsuhiko/vim-jinja'
 
 "Plug 'klen/python-mode' "we keep this mostly for breakpoint adding quickly
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 Plug 'tell-k/vim-autopep8'
 
 Plug 'plasticboy/vim-markdown'
@@ -70,7 +70,7 @@ Plug 'chrisgillis/vim-bootstrap3-snippets'
 
 "Github integration
 Plug 'mattn/webapi-vim'
-Plug 'jaxbot/github-issues.vim'
+"Plug 'jaxbot/github-issues.vim'
 Plug 'vim-scripts/Gist.vim'
 
 "mysql
@@ -106,15 +106,15 @@ Plug 'weierophinney/argumentrewrap'
 "https://github.com/mjacobus/.dotfiles/blob/master/vim/plugins.vim
 "
 "
-Plug 'StanAngeloff/php.vim'
-"Plug 'squizlabs/PHP_CodeSniffer' "does not download wth
-Plug 'phpmd/phpmd'
-Plug 'joonty/vim-phpunitqf'
-"Plug 'joonty/vdebug'
-Plug 'tobyS/pdv'
-Plug 'othree/html5.vim'
+"Plug 'StanAngeloff/php.vim'
+""Plug 'squizlabs/PHP_CodeSniffer' "does not download wth
+"Plug 'phpmd/phpmd'
+"Plug 'joonty/vim-phpunitqf'
+""Plug 'joonty/vdebug'
+"Plug 'tobyS/pdv'
+"Plug 'othree/html5.vim'
 
-Plug 'captbaritone/better-indent-support-for-php-with-html'
+"Plug 'captbaritone/better-indent-support-for-php-with-html'
 
 "https://github.com/b4n/ctags/tree/better-php-parser
 
