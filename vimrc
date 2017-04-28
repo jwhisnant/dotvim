@@ -293,7 +293,8 @@ endif
 
 "http://www.sontek.net/blog/2011/05/07/turning_vim_into_a_modern_python_ide.html
 
-au FileType python set omnifunc=pythoncomplete#Complete
+"au FileType python set omnifunc=pythoncomplete#Complete
+au FileType python setlocal formatprg=autopep8\ -
 
 
 " PHP
