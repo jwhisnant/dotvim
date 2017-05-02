@@ -57,6 +57,8 @@ Plug 'mitsuhiko/vim-jinja'
 "Plug 'klen/python-mode' "we keep this mostly for breakpoint adding quickly
 "Plug 'davidhalter/jedi-vim'
 Plug 'tell-k/vim-autopep8'
+"Plug 'nvie/vim-flake8'
+Plug 'andviro/flake8-vim'
 
 Plug 'plasticboy/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
