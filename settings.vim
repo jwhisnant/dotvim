@@ -30,8 +30,8 @@ let g:syntastic_php_checkers = ['php',]
 "
 let g:syntastic_python_checkers = ['python', 'flake8', 'pep8']
 
-let g:syntastic_python_flake8_args='--ignore=E702,E501,E265,E116,E261,E262,E261' "ignore long lines and one-liners
-let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=E702,E265,E116,E261,E262,E261' "ignore one-liners and length=120
+let g:syntastic_python_flake8_args='--ignore=E702,E501,E265,E114,E116,E261,E262,E261' "ignore long lines and one-liners
+let g:syntastic_python_pep8_args='--max-line-length option=120 --ignore=E702,E265,E114,E116,E261,E262,E261' "ignore one-liners and length=120
 
 "let g:syntastic_always_populate_loc_list = 0 
 let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it manually
@@ -40,6 +40,10 @@ let g:syntastic_auto_loc_list = 0 "do not open by location window, I will do it 
 let g:syntastic_python_pep8_max_line_length=120
 
 "let g:syntastic_python_pylint_post_args="--max-line-length=120"
+
+"https://github.com/andviro/flake8-vim
+let g:PyFlakeDisabledMessages = 'E116,E114,E501'
+
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>" "YCM uses tab

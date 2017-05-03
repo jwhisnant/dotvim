@@ -26,11 +26,15 @@ function! LoadDefaultMappings()
     "nnoremap <F4> :NumbersOnOff<CR>
     " show classes
     "nmap <F4> :TagbarToggle<CR> 
-    noremap <F5> :GundoToggle<CR> 
+    "noremap <F5> :GundoToggle<CR> 
+    nnoremap <F5> :UndotreeToggle<cr>
+    
    " autocmd FileType python 
     map <buffer> <F11> :call Autopep8()<CR>
     "fix to expand folds or autopep8 does the wrong thing
     noremap <F8> zR<CR> :call Autopep8()<CR>
+    "noremap <F8> zR<CR> :call PyFlakeAuto()<CR>
+
     " vim mouse F12
     nnoremap <silent> <Leader>t :TagbarToggle<CR>
 endfunction

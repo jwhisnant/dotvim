@@ -20,7 +20,10 @@ Plug 'vim-scripts/Conque-Shell'
 "utility
 Plug 'godlygeek/tabular'
 Plug 'chrisbra/csv.vim'
-Plug 'sjl/gundo.vim'
+Plug 'drmikehenry/vim-fixkey'
+
+"Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Wolfy87/vim-enmasse'
 "Plug 'farseer90718/vim-taskwarrior'
