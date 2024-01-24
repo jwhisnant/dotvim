@@ -1,4 +1,16 @@
-"jedi
+"backups
+set directory=$HOME/tmp/
+set backupdir=$HOME/tmp/backup
+set undofile                " Save undos after file closes
+set undodir=$HOME/tmp/undo " where to save undo histories
+set undolevels=10000       " How many undos
+set undoreload=100000        " number of lines to save for undo
+
+"grip
+let g:grip_on = 1
+let g:grip_default_map = 0
+
+""jedi
 let g:jedi#popup_on_dot = 0
 let g:jedi#completions_enabled = 0
 let g:jedi#show_call_signatures = "0"
@@ -61,7 +73,7 @@ let g:UltiSnipsEditSplit="vertical"
 "syntax on
 
 "let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
-let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()'
+let g:pymode_breakpoint_cmd = 'breakpoint()'
 
 
 let g:autopep8_max_line_length=120 "E501
@@ -123,4 +135,10 @@ let g:tagbar_iconchars = ['+', '-']
 "set SQL DBext defaults
 :let  g:dbext_default_history_size = 4096
 
+"ale
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+         \   'python': ['black'],
+     \}
 

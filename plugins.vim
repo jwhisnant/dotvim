@@ -11,27 +11,34 @@ call plug#begin('~/.vim/plugged')
 " This file will contain plugins only ...
 " let Vundle manage Vundle, required
 " setup
-Plug 'gmarik/Vundle.vim'
+"Plug 'gmarik/Vundle.vim'
+
 Plug 'flazz/vim-colorschemes'
 
 "shell
 Plug 'vim-scripts/Conque-Shell'
+
+" README files
+Plug 'PratikBhusal/vim-grip'
 
 "utility
 Plug 'godlygeek/tabular'
 Plug 'chrisbra/csv.vim'
 Plug 'drmikehenry/vim-fixkey'
 
-"Plug 'sjl/gundo.vim'
 Plug 'mbbill/undotree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Wolfy87/vim-enmasse'
-"Plug 'farseer90718/vim-taskwarrior'
 Plug 'samsonw/vim-task'
 Plug 'tpope/vim-unimpaired'
 Plug 'rking/ag.vim'
 Plug 'mtth/scratch.vim'
 Plug 'jmcantrell/vim-virtualenv'
+
+" task
+"Plug 'farseer90718/vim-taskwarrior'
+"
+
 "
 " vcs
 "Plug 'airblade/vim-gitgutter' " use signify
@@ -57,9 +64,12 @@ Plug 'ryanoasis/vim-webdevicons'
 Plug 'scrooloose/syntastic'
 Plug 'mitsuhiko/vim-jinja'
 
+"ale
+Plug 'dense-analysis/ale'
+
 "Plug 'klen/python-mode' "we keep this mostly for breakpoint adding quickly
 "Plug 'davidhalter/jedi-vim'
-Plug 'tell-k/vim-autopep8'
+"Plug 'tell-k/vim-autopep8'
 "Plug 'nvie/vim-flake8'
 Plug 'andviro/flake8-vim'
 
@@ -84,9 +94,9 @@ Plug 'vim-scripts/dbext.vim'
 Plug 'vim-scripts/SQLComplete.vim' "doesnt seem to work
 
 " tmux 14.04
-Plug 'christoomey/vim-tmux-navigator'
+"Plug 'christoomey/vim-tmux-navigator'
 "Plug 'kikijump/tslime.vim'
-Plug 'edkolev/tmuxline.vim'
+"Plug 'edkolev/tmuxline.vim'
 
 Plug 'alfredodeza/pytest.vim'
 Plug 'nvie/vim-togglemouse'

@@ -174,7 +174,7 @@ source $HOME/.vim/functions.vim
 "noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
 noremap <silent> <Leader><tab> :MBEbb<CR>
 
-noremap <silent> <Leader>b iimport ipdb ; ipdb.set_trace()  #XXX BREAKPOINT<CR><esc> 
+noremap <silent> <Leader>b ibreakpoint()  #XXX BREAKPOINT<CR><esc>
 
 let g:miniBufExplorerAutoStart = 0          " Open MBE manually when needed.
 let g:miniBufExplTabWrap = 1                " Don't break a minibuf tab across lines

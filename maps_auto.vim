@@ -18,6 +18,8 @@ noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
 noremap <silent> <Leader><tab> :MBEbb<CR>
 nnoremap <silent> <Leader>s :call argumentrewrap#RewrapArguments()<CR>
 
+" number
+:set relativenumber
 
 function! LoadDefaultMappings()
     silent !echo 'Setting Default Mappings'
