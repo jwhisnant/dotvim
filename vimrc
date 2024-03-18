@@ -23,7 +23,7 @@ cmap w!! %!sudo tee > /dev/null %
 "let g:NERDSpaceDelims = 1
 
 "show what I type
-set showcmd 
+set showcmd
 
 set colorcolumn=
 
@@ -87,7 +87,7 @@ color desert256v2
 "color ingretu
 "color colorful256
 
-"To highlight all search matches in a file, set the following option: 
+"To highlight all search matches in a file, set the following option:
 set hlsearch
 
 "If you prefer backspace and delete in Insert mode to have the old behavior,
@@ -174,7 +174,7 @@ source $HOME/.vim/functions.vim
 "noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
 noremap <silent> <Leader><tab> :MBEbb<CR>
 
-noremap <silent> <Leader>b ibreakpoint()  #XXX BREAKPOINT<CR><esc>
+noremap <silent> <Leader>b ibreakpoint()  # XXX BREAKPOINT<CR><esc>
 
 let g:miniBufExplorerAutoStart = 0          " Open MBE manually when needed.
 let g:miniBufExplTabWrap = 1                " Don't break a minibuf tab across lines
@@ -248,5 +248,15 @@ set completeopt=menuone,longest,preview
  nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
  nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
-au FileType python setlocal formatprg=autopep8\ -
+"au FileType python setlocal formatprg=autopep8\ -
+"
+"
+"ale
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
 
+let g:ale_fix_on_save = 1
+
+"
