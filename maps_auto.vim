@@ -6,17 +6,16 @@ inoremap <F1> <nop>
 nnoremap <F1> <nop>
 vnoremap <F1> <nop>
 
+noremap <leader>e :!python -m pdb %<CR>
+
 "folding
 :set foldmethod=indent
 nnoremap <space> za
 vnoremap <space> zf
 
 "defaults for all mappings
-noremap <F1> :MBEToggle<CR>
-nnoremap <silent> <Leader>t :TagbarToggle<CR>
-noremap <silent> <Leader>b :MBEOpen<CR>:MBEFocus<CR>
-noremap <silent> <Leader><tab> :MBEbb<CR>
-nnoremap <silent> <Leader>s :call argumentrewrap#RewrapArguments()<CR>
+"noremap <silent> <Leader><tab> :MBEbb<CR>
+"nnoremap <silent> <Leader>s :call argumentrewrap#RewrapArguments()<CR>
 
 " number
 :set relativenumber
@@ -57,31 +56,9 @@ function! LoadPhpMappings()
     call Vdebug_load_keymaps(g:vdebug_keymap)
 endfunction
 
-"let g:vdebug_keymap_defaults = {
-"\    'run' : '<F5>',
-"\    'run_to_cursor' : '<F9>',
-"\    'step_over' : '<F2>',
-"\    'step_into' : '<F3>',
-"\    'step_out' : '<F4>',
-"\    'close' : '<F6>',
-"\    'detach' : '<F7>',
-"\    'set_breakpoint' : '<F10>',
-"\    'get_context' : '<F11>',
-"\    'eval_under_cursor' : '<F12>',
-"\    'eval_visual' : '<Leader>e'
-"\}
-
 
 "vim mouse"
 "we have to edit that on our own ...
-
-"noremap <F7> :PymodeLint<CR>  " we will let syntastic do this instead on file write
-
-"https://github.com/tell-k/vim-autopep8 map to a key we dont want to use ...
-
-" Orgmode requirements
-"autocmd! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-"autocmd BufEnter *.org            call org#SetOrgFileType()
 
 "On file open and FileRead
 autocmd BufRead,BufNewFile *.md set filetype=markdown "silly modular
@@ -109,3 +86,21 @@ autocmd BufNewFile,BufRead todo.txt,*.task,*.tasks setfiletype task
 
 " Number for the xml and zcml and pt files - seems to be 2 ...
 autocmd BufRead,BufNewFile *.zcml,*.xml,*.pt,*.kss,*.css setlocal nocompatible tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+
+
+augroup python_tools
+  autocmd!
+  autocmd FileType python nnoremap <buffer> <leader>e :!script -c "python -m pdb %"; ansifilter typescript > typescript.log <CR>
+  autocmd FileType python nnoremap <buffer> <leader>f :write<CR>:rightbelow vertical terminal ++close python3 -m pdb %<CR>
+augroup END
+
+augroup node_tools
+  autocmd!
+  autocmd FileType javascript nnoremap <buffer> <leader>e :!node inspect %<CR>
+  "autocmd FileType javascript nnoremap <buffer> <leader>e :!ndb %<CR>
+augroup END
+
+augroup shell_tools
+  autocmd!
+  autocmd FileType sh nnoremap <buffer> <leader>e :!script -c "zsh %"; ansifilter typescript > typescript.log <CR>
+augroup END

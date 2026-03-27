@@ -13,6 +13,8 @@ call plug#begin('~/.vim/plugged')
 " setup
 "Plug 'gmarik/Vundle.vim'
 
+Plug 'zlqm/docViewer', { 'rtp': 'plugins/vim' }
+
 Plug 'flazz/vim-colorschemes'
 
 "shell
@@ -20,6 +22,13 @@ Plug 'vim-scripts/Conque-Shell'
 
 " README files
 Plug 'PratikBhusal/vim-grip'
+
+" AI
+"Plug 'whatever555/free-pilot-vim'
+Plug 'madox2/vim-ai'
+
+" node
+Plug 'puremourning/vimspector'
 
 "utility
 Plug 'godlygeek/tabular'
@@ -34,6 +43,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'rking/ag.vim'
 Plug 'mtth/scratch.vim'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'mgedmin/coverage-highlight.vim'
 
 " task
 "Plug 'farseer90718/vim-taskwarrior'
@@ -50,7 +60,7 @@ Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'fholgado/minibufexpl.vim'
-Plug 'majutsushi/tagbar'
+"Plug 'majutsushi/tagbar'
 
 "look and feel
 Plug 'flazz/vim-colorschemes'
@@ -63,12 +73,21 @@ Plug 'mitsuhiko/vim-jinja'
 "ale
 Plug 'dense-analysis/ale'
 
+"lsp
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'mattn/vim-lsp-settings'
+"Plug 'rhysd/vim-lsp-ale'
+
+"black
+Plug 'ambv/black'
+
 " python-mode conflicts with jedi
 "Plug 'tell-k/vim-autopep8'
 "Plug 'nvie/vim-flake8'
 
 "Plug 'andviro/flake8-vim'
 Plug 'davidhalter/jedi-vim'
+
 
 Plug 'plasticboy/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
@@ -91,7 +110,9 @@ Plug 'krisajenkins/vim-pipe'
 Plug 'vim-scripts/dbext.vim'
 Plug 'vim-scripts/SQLComplete.vim' "doesnt seem to work
 
-Plug 'alfredodeza/pytest.vim'
+"Plug 'alfredodeza/pytest.vim'
+Plug 'vim-test/vim-test'
+
 Plug 'nvie/vim-togglemouse'
 
 " org
@@ -104,7 +125,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'wikitopian/hardmode'
 
 Plug 'godlygeek/tabular'
-Plug 'weierophinney/argumentrewrap'
+"Plug 'weierophinney/argumentrewrap'
 
 " All of your Plugs must be added before the following line
 call plug#end()

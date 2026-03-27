@@ -33,6 +33,10 @@ set colorcolumn=
 "I dont think I want mccabe
 "let g:syntastic_python_checkers=['python', 'flake8', 'pylint', 'pyflakes', 'pep8']
 
+" Allow project-specific vimrc files
+set exrc
+" Optional but strongly recommended for security:
+set secure
 
 "python-mode wants
 filetype plugin indent on
@@ -149,10 +153,17 @@ source $HOME/.vim/maps_auto.vim
 "load settings
 source $HOME/.vim/settings.vim
 
-"load functions
-source $HOME/.vim/functions.vim
-:call LoadDefaultMappings()
+"load ale
+source $HOME/.vim/ale.vim
 
+"load free-pilot
+source $HOME/.vim/free-pilot.vim
+
+"load vimpsector
+source $HOME/.vim/vimspector.vim
+
+"load vim-test
+source $HOME/.vim/vim_test.vim
 
 "set SQL DBext defaults
 :let  g:dbext_default_history_size = 4096
@@ -238,25 +249,3 @@ endif
 
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
-
-" Execute the tests
- nmap <silent><Leader>tf <Esc>:Pytest file<CR>
- nmap <silent><Leader>tc <Esc>:Pytest class<CR>
- nmap <silent><Leader>tm <Esc>:Pytest method<CR>
- " cycle through test errors
- nmap <silent><Leader>tn <Esc>:Pytest next<CR>
- nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
- nmap <silent><Leader>te <Esc>:Pytest error<CR>
-
-"au FileType python setlocal formatprg=autopep8\ -
-"
-"
-"ale
-let g:ale_lint_on_save = 0
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 1
-
-let g:ale_fix_on_save = 1
-
-"

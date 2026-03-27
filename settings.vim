@@ -135,22 +135,6 @@ let g:tagbar_iconchars = ['+', '-']
 "set SQL DBext defaults
 :let  g:dbext_default_history_size = 4096
 
-let g:ale_linters= {
-    \    '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \    'javascript': ['eslint', 'prettier'],
-    \    'python': ['flake8'],
-    \    'sql': ['sqlfluff']
-    \}
-
-"\    'python': ['black', 'isort', 'autoimport'],
-
-let g:ale_fixers = {
-    \    '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \    'javascript': ['eslint', 'prettier'],
-    \    'python': ['black', 'isort'],
-    \    'sql': ['sqlfluff']
-    \}
-
 "https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
 "Mode Settings
 "

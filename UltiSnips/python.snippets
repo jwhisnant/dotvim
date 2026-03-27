@@ -1,18 +1,23 @@
 snippet todo
-# XXX TODO: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $CUSER`)}
+# XXX TODO: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $USER`)}
 endsnippet
 
 snippet fix
-# XXX FIXME: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $CUSER`)}
+# XXX FIXME: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $USER`)}
 endsnippet
 
 snippet eek
-# XXX EEK!: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $CUSER`)}
+# XXX EEK!: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $USER`)}
 endsnippet
 
 snippet note
-# XXX NOTE: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $CUSER`)}
+# XXX NOTE: ${1:desc} ${2:`date +%Y/%m/%d`} ${3: (`echo $USER`)}
 endsnippet
+
+snippet qa
+# noqa: E501
+endsnippet
+
 
 snippet cov
 # pragma: no cover
@@ -57,5 +62,3 @@ logger = logging.getLogger()
 #logging.getLogger('sqlalchemy.engine.base').setLevel(logging.DEBUG)
 
 endsnippet
-
-
